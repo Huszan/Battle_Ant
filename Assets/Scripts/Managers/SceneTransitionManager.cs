@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransitionManager : MonoBehaviour
+public class SceneTransitionManager
 {
     public static IEnumerator LoadScene(int index, GameObject[] objectsToMove = null)
     {

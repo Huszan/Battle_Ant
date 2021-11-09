@@ -28,7 +28,7 @@ public class StartHandler : MonoBehaviour
         }
         else
         {
-            PopupManager.PopError("Map is already generated");
+            Debug.LogError("Map is already generated");
         }
 
         StartCoroutine(SceneTransitionManager.LoadScene(index, objectsToMove));

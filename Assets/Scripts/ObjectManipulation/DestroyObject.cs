@@ -6,7 +6,7 @@ public class DestroyObject : MonoBehaviour
 {
     public float timeToDestroy;
 
-    public float timeElapsed = 0f;
+    private float timeElapsed = 0f;
     void Update()
     {
         timeElapsed += Time.deltaTime;
