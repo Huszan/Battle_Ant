@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea62588dcb48e874d9259d853479e92a, type: 3}
   m_Name: errorData
   m_EditorClassIdentifier: 
-  boxColor: {r: 1, g: 0, b: 0, a: 0.627451}
+  boxColor: {r: 1, g: 0, b: 0, a: 0.78431374}
   fontColor: {r: 1, g: 1, b: 1, a: 1}
   timeToDestroy: 5

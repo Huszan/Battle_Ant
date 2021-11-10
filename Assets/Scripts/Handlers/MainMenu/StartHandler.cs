@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StartHandler : MonoBehaviour
 {
     [Header("Form")]
-    public Slider sliderX;
-    public Slider sliderY;
-    public Slider sliderEnemies;
-    public TMPro.TMP_Dropdown dropdownDifficulty;
+    [SerializeField]
+    private Slider sliderX, sliderY, sliderEnemies;
+    [SerializeField]
+    private TMP_Dropdown dropdownDifficulty;
+
     [Header("Game generation")]
-    public GameObject tilemapPrefab;
+    [SerializeField]
+    private GameObject tilemapGenerator;
+
     [Header("Transition")]
-    public GameObject[] objectsToMove;
+    [SerializeField]
+    private GameObject[] objectsToMove;
 
     public Vector2 MapSize()
     {
@@ -22,7 +27,7 @@ public class StartHandler : MonoBehaviour
     {
         if(GameObject.Find("Tilemap") == null)
         {
-            GameObject generatedTilemap = Instantiate(tilemapPrefab);
+            GameObject generatedTilemap = Instantiate(tilemapGenerator);
             generatedTilemap.name = "Tilemap";
             generatedTilemap.GetComponent<Tilemap>().GenerateTilemap(MapSize());
         }

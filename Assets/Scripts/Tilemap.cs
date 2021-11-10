@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 
 public class Tilemap : MonoBehaviour
-{
-    /* Map Size */
-    private Vector2 mapSize;
-    /* Tiles */
-    
-    /* Import */
+{  
+    [Header("Import")]
     [SerializeField]
     private GameObject tileGrass;
     [SerializeField]
     private GameObject tileOOB;
+
+    private Vector2 mapSize;
     private Vector3 tileSize;
     private GameObject[] createdTiles;
 
