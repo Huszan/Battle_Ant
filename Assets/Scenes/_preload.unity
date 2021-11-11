@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 898681956}
   - component: {fileID: 898681957}
   - component: {fileID: 898681958}
+  - component: {fileID: 898681959}
   m_Layer: 0
   m_Name: _GlobalManagers
   m_TagString: Untagged
@@ -330,3 +331,15 @@ MonoBehaviour:
   popupBoxPrefab: {fileID: 2032080783588759472, guid: 568935317321770458c049da20b9910d,
     type: 3}
   popupFrame: {fileID: 418791253}
+--- !u!114 &898681959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898681955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf8faefb0e5a1044a01ab5d57ffbb92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

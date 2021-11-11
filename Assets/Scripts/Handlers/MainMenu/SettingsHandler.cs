@@ -1,18 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class SettingsHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("References")]
+    [SerializeField]
+    private Slider sliderVolumeMaster;
+    [SerializeField]
+    private Slider sliderVolumeSfx;
+    [SerializeField]
+    private Slider sliderVolumeMusic;
+    [SerializeField]
+    private TMP_Dropdown dropdownResolution;
+    [SerializeField]
+    private Toggle toggleFullscren;
+
+    private void Awake()
     {
-        
+        GetSupportedResolutions();
+    }
+    public void Submit()
+    {
+        GameObject.Find("_GlobalManagers").
+            GetComponent<SettingsManager>().
+            SaveSetting(GetSettings());
+    }
+    private Setting GetSettings()
+    {
+        Setting setting = new Setting();
+
+        setting.volume = new Volume(
+            sliderVolumeMaster.value,
+            sliderVolumeSfx.value,
+            sliderVolumeMusic.value);
+        setting.resolution = Screen.resolutions[dropdownResolution.value];
+        setting.fullscreen = toggleFullscren.isOn;
+
+        return setting;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void GetSupportedResolutions()
     {
-        
+        dropdownResolution.ClearOptions();
+        foreach (Resolution r in Screen.resolutions)
+        {
+            TMP_Dropdown.OptionData optionData = new TMP_Dropdown.OptionData();
+            optionData.text = r.ToString();
+            dropdownResolution.options.Add(optionData);
+        }
     }
 }
