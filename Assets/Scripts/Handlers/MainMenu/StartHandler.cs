@@ -6,7 +6,11 @@ public class StartHandler : MonoBehaviour
 {
     [Header("Form")]
     [SerializeField]
-    private Slider sliderX, sliderY, sliderEnemies;
+    private Slider sliderX;
+    [SerializeField]
+    private Slider sliderY;
+    [SerializeField]
+    private Slider sliderEnemies;
     [SerializeField]
     private TMP_Dropdown dropdownDifficulty;
 

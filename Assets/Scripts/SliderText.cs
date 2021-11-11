@@ -4,10 +4,10 @@ using TMPro;
 
 public class SliderText : MonoBehaviour
 {
+    [SerializeField]
+    private Slider slider;
     void Update()
     {
-        //Give slider value to text GameObject
-        GetComponentInChildren<TMP_Text>().text = 
-            GetComponent<Slider>().value.ToString();
+        transform.GetComponent<TMP_Text>().text = slider.value.ToString();
     }
 }
