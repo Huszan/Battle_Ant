@@ -16,7 +16,8 @@ public class Tilemap : MonoBehaviour
 
     private void Awake()
     {
-        popupManager = GameObject.Find("_GlobalManagers").GetComponent<PopupManager>();
+        popupManager = GameObject.Find("GlobalManagers")
+            .GetComponent<PopupManager>();
         tileSize = tileGrass.GetComponent<Renderer>().bounds.size;
     }
     public void SetMapSize(Vector2 mapSize)

@@ -3,8 +3,14 @@ using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
 {
+    private PopupManager popupManager;
     private Setting setting;
 
+    private void Awake()
+    {
+        popupManager = GameObject.Find("GlobalManagers")
+            .GetComponent<PopupManager>();
+    }
     public void SaveSetting(Setting setting)
     {
         this.setting = setting;
@@ -12,6 +18,7 @@ public class SettingsManager : MonoBehaviour
 
         setting.Log();
         Debug.Log(Screen.currentResolution);
+        popupManager.PopSuccess("Settings changed");
     }
     private void UpdateSettings()
     {

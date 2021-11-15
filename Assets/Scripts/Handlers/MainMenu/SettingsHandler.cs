@@ -23,7 +23,7 @@ public class SettingsHandler : MonoBehaviour
     }
     public void Submit()
     {
-        GameObject.Find("_GlobalManagers").
+        GameObject.Find("GlobalManagers").
             GetComponent<SettingsManager>().
             SaveSetting(GetSettings());
     }
