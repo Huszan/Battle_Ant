@@ -1,23 +1,29 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tilemap : MonoBehaviour
-{
-    /* Map Size */
+{  
+    [Header("Import")]
+    [SerializeField]
+    private GameObject tileGrass;
+    [SerializeField]
+    private GameObject tileOOB;
+
     private Vector2 mapSize;
-    /* Tiles */
-    GameObject[] createdTiles;
-    /* Import */
-    public GameObject tileGrass;
-    public GameObject tileOOB;
-
     private Vector3 tileSize;
+    private GameObject[] createdTiles;
 
+    private PopupManager popupManager;
+
+    private void Awake()
+    {
+        popupManager = GameObject.Find("GlobalManagers")
+            .GetComponent<PopupManager>();
+        tileSize = tileGrass.GetComponent<Renderer>().bounds.size;
+    }
     public void SetMapSize(Vector2 mapSize)
     {
         this.mapSize.x = mapSize.x;
         this.mapSize.y = mapSize.y;
-        tileSize = tileGrass.GetComponent<Renderer>().bounds.size;
     }
     private void StoreTiles()
     {
@@ -53,7 +59,7 @@ public class Tilemap : MonoBehaviour
     {
         if (!MapIsGenerated()) 
         {
-            PopupManager.PopError("Map is not generated!");
+            Debug.LogError("Map is not generated!");
             return; 
         }
         
@@ -104,7 +110,7 @@ public class Tilemap : MonoBehaviour
         }
         MainCameraManager.CenterToMap(mapSize, tileSize);
         StoreTiles();
-        PopupManager.PopInfo("Map created!");
+        popupManager.PopSuccess("Map created!");
     }
 
 }

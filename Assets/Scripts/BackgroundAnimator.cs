@@ -1,20 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BackgroundHandler : MonoBehaviour
+public class BackgroundAnimator : MonoBehaviour
 {
     [Header("Entity options")]
-    public GameObject entityToSpawn;
-    public float sizeMin = 0.1f;
-    public float sizeMax = 2f;
-    public float speedMin = 80f;
-    public float speedMax = 230f;
-    public Color[] colors;
+    [SerializeField]
+    private GameObject entityToSpawn;
+    [SerializeField]
+    private float sizeMin = 0.1f, sizeMax = 2f;
+    [SerializeField]
+    private float speedMin = 80f, speedMax = 230f;
+    [SerializeField]
+    private Color[] colors;
+
     [Header("Spawn options")]
-    public float timeBetweenSpawns = 0.5f;
-    public int spawnAmount = 1;
+    [SerializeField]
+    private float timeBetweenSpawns = 0.5f;
+    [SerializeField]
+    private int spawnAmount = 1;
 
     private float timePassed = 0f;
+    private bool canSpawn = false;
+
+    public void Toggle()
+    {
+        canSpawn = !canSpawn;
+    }
 
     private void FixedUpdate()
     {
