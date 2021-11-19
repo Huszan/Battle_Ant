@@ -22,9 +22,13 @@ public class SettingsHandler : MonoBehaviour
     }
     public void Submit()
     {
+        Setting newSetting = GetSettings();
+
+        CurrentUser.user.setting = newSetting;
         GameObject.Find("GlobalManagers").
             GetComponent<SettingsManager>().
-            SaveSetting(GetSettings());
+            SaveSetting(newSetting);
+        DatabaseManager.UpdateUser(CurrentUser.user);
     }
     private Setting GetSettings()
     {
@@ -34,8 +38,11 @@ public class SettingsHandler : MonoBehaviour
             sliderVolumeMaster.value,
             sliderVolumeSfx.value,
             sliderVolumeMusic.value);
-        setting.resolution = Screen.resolutions[dropdownResolution.value];
-        setting.fullscreen = toggleFullscren.isOn;
+        setting.SetResolution(
+            Screen.resolutions[dropdownResolution.value].width,
+            Screen.resolutions[dropdownResolution.value].height,
+            toggleFullscren.isOn,
+            Screen.resolutions[dropdownResolution.value].refreshRate);
 
         return setting;
     }

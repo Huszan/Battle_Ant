@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mono.Data.Sqlite;
 
 public class UserMenuHandler : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class UserMenuHandler : MonoBehaviour
     [SerializeField]
     private GameObject userBlockPref;
 
-    private UserDatabase userDatabase;
     private PopupManager popupManager;
 
     private void Start()
@@ -24,9 +24,6 @@ public class UserMenuHandler : MonoBehaviour
         popupManager =
             GameObject.Find("GlobalManagers")
             .GetComponent<PopupManager>();
-        userDatabase = 
-            GameObject.Find("Database")
-            .GetComponent<UserDatabase>();
 
         ShowUsers();
     }
@@ -42,7 +39,7 @@ public class UserMenuHandler : MonoBehaviour
             if (!child.CompareTag("DD"))
                 Destroy(child.gameObject);
         }
-        foreach (User user in userDatabase.GetUsers())
+        foreach (User user in DatabaseManager.GetUsers())
         {
             GameObject block = Instantiate(userBlockPref, userView.transform);
             block.name = "UserBlock";
@@ -70,22 +67,30 @@ public class UserMenuHandler : MonoBehaviour
         }
         else
         {
-            userDatabase.AddUser(new User(
-                usernameInput.text));
-
+            try
+            {
+                DatabaseManager.AddUser(usernameInput.text);
+            }
+            catch (SqliteException e)
+            {
+                Debug.LogWarning(e.Message);
+                popupManager.PopWarning("Sorry, omething went wrong. Try again.");
+            }
+            usernameInput.text = "";
             ShowUsers();
         }
     }
     public void DeleteUser(User user)
     {
-        userDatabase.DeleteUser(user);
+        DatabaseManager.DeleteUser(user.name);
         popupManager.PopSuccess("Account with name " + user.name + " was successfully deleted");
 
         ShowUsers();
     }
     public void SelectUser(User user)
     {
-        //Switch current user
+        CurrentUser.user = user;
+        CurrentUser.ExecuteSettings();
         popupManager.PopSuccess("Hello " + user.name + "!");
 
         ShowUsers();
@@ -97,7 +102,7 @@ public class UserMenuHandler : MonoBehaviour
     }
     private bool IsDuplicate(string name)
     {
-        foreach (User user in userDatabase.GetUsers())
+        foreach (User user in DatabaseManager.GetUsers())
         {
             if (user.name == name)
                 return true;

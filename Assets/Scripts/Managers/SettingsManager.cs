@@ -24,10 +24,10 @@ public class SettingsManager : MonoBehaviour
     {
         // THERE WILL BE CODE FOR SOUND UPDATE
         Screen.SetResolution(
-            setting.resolution.width,
-            setting.resolution.height,
+            setting.screenWidth,
+            setting.screenHeight,
             setting.fullscreen,
-            setting.resolution.refreshRate);
+            setting.refreshRate);
     }
 
 }
