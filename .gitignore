@@ -37,4 +37,5 @@ sysinfo.txt
 *.unitypackage
 mainDB.db-journal
 *.db-journal
+*.db
 *.meta
