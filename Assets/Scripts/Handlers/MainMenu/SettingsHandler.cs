@@ -20,6 +20,10 @@ public class SettingsHandler : MonoBehaviour
     {
         GetSupportedResolutions();
     }
+    private void OnEnable()
+    {
+        UpdateSettings();
+    }
     public void Submit()
     {
         Setting newSetting = GetSettings();
@@ -44,6 +48,31 @@ public class SettingsHandler : MonoBehaviour
 
         return setting;
     }
+    public void UpdateSettings()
+    {
+        UpdateSoundSettings();
+        UpdateScreenSettings();
+    }
+    private void UpdateSoundSettings()
+    {
+        // TODO
+    }
+    private void UpdateScreenSettings()
+    {
+        var index = 0;
+        foreach (var option in dropdownResolution.options)
+        {
+            if (Screen.resolutions[index].width == Screen.currentResolution.width &&
+                Screen.resolutions[index].height == Screen.currentResolution.height)
+            {
+                Debug.Log("THIS IS IT!");
+                dropdownResolution.value = index;
+            }
+            index++;
+        }
+        toggleFullscren.isOn = Screen.fullScreen;
+    }
+ 
 
     private void GetSupportedResolutions()
     {
