@@ -12,12 +12,8 @@ public class Tilemap : MonoBehaviour
     private Vector3 tileSize;
     private GameObject[] createdTiles;
 
-    private PopupManager popupManager;
-
     private void Awake()
     {
-        popupManager = GameObject.Find("GlobalManagers")
-            .GetComponent<PopupManager>();
         tileSize = tileGrass.GetComponent<Renderer>().bounds.size;
     }
     public void SetMapSize(Vector2 mapSize)
@@ -110,7 +106,9 @@ public class Tilemap : MonoBehaviour
         }
         MainCameraManager.CenterToMap(mapSize, tileSize);
         StoreTiles();
-        popupManager.PopSuccess("Map created!");
+        PopupManager.Instance.Pop(
+            PopupManager.PopType.success, 
+            "Map created!");
     }
 
 }

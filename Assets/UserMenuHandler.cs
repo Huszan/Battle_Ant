@@ -16,15 +16,9 @@ public class UserMenuHandler : MonoBehaviour
     [SerializeField]
     private GameObject userBlockPref;
 
-    private PopupManager popupManager;
-
     private void Start()
     {
         userViewDefaultSize = GetRect(userView).sizeDelta;
-        popupManager =
-            GameObject.Find("GlobalManagers")
-            .GetComponent<PopupManager>();
-
         ShowUsers();
     }
     private RectTransform GetRect(GameObject go)
@@ -57,12 +51,16 @@ public class UserMenuHandler : MonoBehaviour
     {
         if (usernameInput.text == "")
         {
-            popupManager.PopWarning("You can't create account without a name");
+            PopupManager.Instance.Pop(
+                PopupManager.PopType.warning, 
+                "You can't create account without a name");
             return;
         }
         if (IsDuplicate(usernameInput.text))
         {
-            popupManager.PopWarning("Account with this name is already created");
+            PopupManager.Instance.Pop(
+                PopupManager.PopType.warning, 
+                "Account with this name is already created");
             return;
         }
         else
@@ -74,7 +72,9 @@ public class UserMenuHandler : MonoBehaviour
             catch (SqliteException e)
             {
                 Debug.LogWarning(e.Message);
-                popupManager.PopWarning("Sorry, omething went wrong. Try again.");
+                PopupManager.Instance.Pop(
+                    PopupManager.PopType.warning, 
+                    "Sorry, omething went wrong. Try again.");
             }
             usernameInput.text = "";
             ShowUsers();
@@ -83,7 +83,9 @@ public class UserMenuHandler : MonoBehaviour
     public void DeleteUser(User user)
     {
         DatabaseManager.DeleteUser(user.name);
-        popupManager.PopSuccess("Account with name " + user.name + " was successfully deleted");
+        PopupManager.Instance.Pop(
+            PopupManager.PopType.success, 
+            "Account with name " + user.name + " was successfully deleted");
 
         ShowUsers();
     }
@@ -91,7 +93,9 @@ public class UserMenuHandler : MonoBehaviour
     {
         CurrentUser.user = user;
         CurrentUser.ExecuteSettings();
-        popupManager.PopSuccess("Hello " + user.name + "!");
+        PopupManager.Instance.Pop(
+            PopupManager.PopType.success, 
+            "Hello " + user.name + "!");
 
         ShowUsers();
     }

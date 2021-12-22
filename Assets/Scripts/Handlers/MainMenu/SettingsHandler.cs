@@ -25,9 +25,7 @@ public class SettingsHandler : MonoBehaviour
         Setting newSetting = GetSettings();
 
         CurrentUser.user.setting = newSetting;
-        GameObject.Find("GlobalManagers").
-            GetComponent<SettingsManager>().
-            SaveSetting(newSetting);
+        SettingsManager.Instance.SaveSetting(newSetting);
         DatabaseManager.UpdateUser(CurrentUser.user);
     }
     private Setting GetSettings()

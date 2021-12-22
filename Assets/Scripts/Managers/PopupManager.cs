@@ -2,6 +2,14 @@
 public class PopupManager : MonoBehaviour
 {
     public static PopupManager Instance { get; private set; }
+    public enum PopType
+    {
+        success,
+        warning,
+        error,
+        info
+    }
+
     [Header("Data")]
     public PopupData successData;
     public PopupData warningData;
@@ -17,38 +25,27 @@ public class PopupManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    public void PopSuccess(string message)
+    public void Pop(PopType type, string message)
     {
         GameObject pop = Instantiate(popupBoxPrefab, popupFrame.transform);
-        pop.GetComponent<Popup>().Setup(successData, message);
-        MovePops();
-    }
-    public void PopWarning(string message)
-    {
-        GameObject pop = Instantiate(popupBoxPrefab, popupFrame.transform);
-        pop.GetComponent<Popup>().Setup(warningData, message);
-        MovePops();
-    }
-    public void PopError(string message)
-    {
-        GameObject pop = Instantiate(popupBoxPrefab, popupFrame.transform);
-        pop.GetComponent<Popup>().Setup(errorData, message);
-        MovePops();
-    }
-    public void PopInfo(string message)
-    {
-        GameObject pop = Instantiate(popupBoxPrefab, popupFrame.transform);
-        pop.GetComponent<Popup>().Setup(infoData, message);
-        MovePops();
-    }
-
-    private void MovePops()
-    {
-        foreach (Transform child in popupFrame.transform)
+        switch(type)
         {
-            child.position += new Vector3(0, -100, 0);
+            case PopType.success:
+                pop.GetComponent<Popup>().Setup(successData, message);
+                break;
+            case PopType.warning:
+                pop.GetComponent<Popup>().Setup(warningData, message);
+                break;
+            case PopType.error:
+                pop.GetComponent<Popup>().Setup(errorData, message);
+                break;
+            case PopType.info:
+                pop.GetComponent<Popup>().Setup(infoData, message);
+                break;
         }
     }
 
