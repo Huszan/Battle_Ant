@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 public class PopupManager : MonoBehaviour
 {
+    public static PopupManager Instance { get; private set; }
     [Header("Data")]
     public PopupData successData;
     public PopupData warningData;
@@ -11,6 +12,12 @@ public class PopupManager : MonoBehaviour
     private GameObject popupBoxPrefab;
     [SerializeField]
     private GameObject popupFrame;
+
+    public void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
 
     public void PopSuccess(string message)
     {
