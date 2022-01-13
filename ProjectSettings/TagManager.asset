@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DD
   - Tilemap
+  - Tile
   layers:
   - Default
   - TransparentFX

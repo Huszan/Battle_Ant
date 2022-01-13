@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5289314801508015054}
   m_Layer: 0
   m_Name: Tile_Grass
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
