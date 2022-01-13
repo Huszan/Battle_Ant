@@ -3545,7 +3545,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 987851461}
   m_HandleRect: {fileID: 987851460}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4461,7 +4461,6 @@ MonoBehaviour:
   tilemapGenerator: {fileID: 657381774710139670, guid: 56e8b6e4b3f960e4a8ca4e0a9bd839f5,
     type: 3}
   objectsToMove:
-  - {fileID: 519420028}
   - {fileID: 657381774710139670, guid: 56e8b6e4b3f960e4a8ca4e0a9bd839f5, type: 3}
 --- !u!1 &646682260
 GameObject:
@@ -9819,7 +9818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -255.14915}
+  m_AnchoredPosition: {x: 420, y: -254.58202}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479177947

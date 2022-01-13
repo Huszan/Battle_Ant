@@ -1,22 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Tilemap tilemap;
-    public float speed = 20f;
-    public float speedMultiplayer = 2f;
+    public float panSpeed = 20f;
+    public float panSpeedMultiplayer = 2f;
+    public float scrollSpeed = 2f;
+    public Vector2 scrollLimit = new Vector2(10, 20);
 
+    private Tilemap tilemap;
     private Camera mainCamera;
     private float currentSpeed;
 
     private void Start()
     {
-        currentSpeed = speed;
+        currentSpeed = panSpeed;
         mainCamera = GetComponent<Camera>();
         if (mainCamera == null)
             Debug.LogError(name + ": there is no camera detected!");
+        LookForTilemap();
     }
 
     private void Update()
@@ -46,17 +47,32 @@ public class CameraController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            currentSpeed = speed * speedMultiplayer;
+            currentSpeed = panSpeed * panSpeedMultiplayer;
         }
         else
-            currentSpeed = speed;
+            currentSpeed = panSpeed;
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        mainCamera.orthographicSize += -scroll * scrollSpeed * Time.deltaTime;
+
+        mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, scrollLimit.x, scrollLimit.y);
 
         Vector2 panLimit = tilemap.GetSize();
-        Debug.Log(panLimit);
         pos.x = Mathf.Clamp(pos.x, 0, panLimit.x);
         pos.y = Mathf.Clamp(pos.y, 0, panLimit.y * 0.75f);
 
         transform.position = pos;
+    }
+    private void LookForTilemap()
+    {
+        var tag = "Tilemap";
+        var go = GameObject.FindGameObjectWithTag("Tilemap");
+        if (go == null)
+            Debug.LogError(name + ": I can't find gameobject with tag " + tag);
+        else
+        {
+            tilemap = go.GetComponent<Tilemap>();
+        }
     }
 
 }

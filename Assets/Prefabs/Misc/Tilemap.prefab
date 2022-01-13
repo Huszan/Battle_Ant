@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 657381774710139668}
   m_Layer: 0
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Tilemap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,4 +45,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileGrass: {fileID: 974665543752796044, guid: b7fe2438f001c15489178a5e1ad50684,
     type: 3}
-  tileOOB: {fileID: 8101368566457239648, guid: 9a8cfabac4be1bf40b84060e6fe9852d, type: 3}
