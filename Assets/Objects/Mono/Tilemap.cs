@@ -6,50 +6,49 @@ public class Tilemap : MonoBehaviour
     [SerializeField]
     private GameObject tileGrass;
 
-    private Vector2 mapSize = new Vector2(30f,30f);
-    private Vector3 tileSize;
-    private GameObject[] createdTiles;
+    public Vector2 MapSize { get; private set; }
+    public Vector3 TileSize { get; private set; }
+    public GameObject[] CreatedTiles { get; private set; }
 
     private void Awake()
     {
-        tileSize = tileGrass.GetComponent<Renderer>().bounds.size;
+        TileSize = tileGrass.GetComponent<Renderer>().bounds.size;
     }
     public void SetMapSize(Vector2 mapSize)
     {
-        this.mapSize.x = mapSize.x;
-        this.mapSize.y = mapSize.y;
+        MapSize = mapSize;
     }
-    public Vector2 GetSize()
+    public Vector2 GetTransformSize()
     {
         return new Vector2(
-            mapSize.x * tileSize.x,
-            mapSize.y * tileSize.y);
+            MapSize.x * TileSize.x,
+            MapSize.y * TileSize.y);
     }
     private void StoreTiles()
     {
-        int tileAmount = (int)mapSize.x * (int)mapSize.y;
-        createdTiles = new GameObject[tileAmount];
+        int tileAmount = (int)MapSize.x * (int)MapSize.y;
+        CreatedTiles = new GameObject[tileAmount];
 
         int tileCounter = 0;
-        for (int i = 0; i < mapSize.y; i++)
+        for (int i = 0; i < MapSize.y; i++)
         {
-            for (int j = 0; j < mapSize.x; j++)
+            for (int j = 0; j < MapSize.x; j++)
             {
-                createdTiles[tileCounter++] = GameObject.Find(i.ToString() + "." + j.ToString());
+                CreatedTiles[tileCounter++] = GameObject.Find(i.ToString() + "." + j.ToString());
             }
         }
     }
     private bool MapSizeIsViable()
     {
-        if (mapSize.x <= 0 && mapSize.y <= 0)  return false;
-        if (mapSize.x > 0 && mapSize.y > 0) return true;
+        if (MapSize.x <= 0 && MapSize.y <= 0)  return false;
+        if (MapSize.x > 0 && MapSize.y > 0) return true;
 
         print(name + " : something went wrong");
         return false;
     }
     private bool MapIsGenerated()
     {
-        if (createdTiles == null)
+        if (CreatedTiles == null)
             return false;
         else
             return true;
@@ -64,7 +63,7 @@ public class Tilemap : MonoBehaviour
         }
         
 
-        foreach (GameObject tile in createdTiles)
+        foreach (GameObject tile in CreatedTiles)
         {
             if(tile.transform.childCount > 0)
             {
@@ -92,12 +91,12 @@ public class Tilemap : MonoBehaviour
 
                     if (i % 2 == 0)
                         tile.transform.position = new Vector3(
-                            (float)(j * (tileSize.x)),
-                            (float)(i * (tileSize.y * 0.75 )), 0);
+                            (float)(j * (TileSize.x)),
+                            (float)(i * (TileSize.y * 0.75 )), 0);
                     if (i % 2 == 1)
                         tile.transform.position = new Vector3(
-                            (float)(j * (tileSize.x) + (tileSize.x / 2)),
-                            (float)(i * (tileSize.y * 0.75)), 0);
+                            (float)(j * (TileSize.x) + (TileSize.x / 2)),
+                            (float)(i * (TileSize.y * 0.75)), 0);
 
                     tile.name = i.ToString() + "." + j.ToString();
                     tile.transform.SetParent(transform);
@@ -105,11 +104,8 @@ public class Tilemap : MonoBehaviour
             }
 
         }
-        MainCameraManager.CenterToMap(mapSize, tileSize);
         StoreTiles();
-        PopupManager.Instance.Pop(
-            PopupManager.PopType.success, 
-            "Map created!");
+        Debug.Log("Map was created");
     }
 
 }

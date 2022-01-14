@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
+public enum Difficulty
+{
+    EASY = 0,
+    NORMAL = 1,
+    HARD = 2
+}
 public class StartHandler : MonoBehaviour
 {
     [Header("Form")]
@@ -14,33 +22,44 @@ public class StartHandler : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown dropdownDifficulty;
 
-    [Header("Game generation")]
-    [SerializeField]
-    private GameObject tilemapGenerator;
+    private Vector2 GetMapSize() => 
+        new Vector2(sliderX.value, sliderY.value);
+    private int GetNumberOfOponents() => 
+        (int)sliderEnemies.value;
+    private Difficulty GetDifficulty() => 
+        (Difficulty)dropdownDifficulty.value;
 
-    [Header("Transition")]
-    [SerializeField]
-    private GameObject[] objectsToMove;
-
-    public Vector2 MapSize()
+    public void StartNewGame(int index)
     {
-        return new Vector2(sliderX.value, sliderY.value);
+        StartCoroutine(StartGameAsync(index));
     }
 
-    public void StartGame(int index)
+    private IEnumerator StartGameAsync(int index)
     {
-        if(GameObject.Find("Tilemap") == null)
+        AsyncOperation operation = SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+        Scene sceneToLoad = SceneManager.GetSceneByBuildIndex(index);
+        operation.allowSceneActivation = false;
+
+        while (operation.progress < 0.9f)
         {
-            GameObject generatedTilemap = Instantiate(tilemapGenerator);
-            generatedTilemap.name = "Tilemap";
-            generatedTilemap.GetComponent<Tilemap>().GenerateTilemap(MapSize());
+            Debug.Log("Loading " + operation.progress + "%");
+            yield return null;
         }
-        else
+        operation.allowSceneActivation = true;
+
+        while (!operation.isDone)
         {
-            Debug.LogError("Map is already generated");
+            Debug.Log("Loading " + operation.progress + "%");
+            yield return null;
         }
 
-        StartCoroutine(SceneTransitionManager.LoadScene(index, objectsToMove));
+        Scene previousScene = SceneManager.GetActiveScene();
+        SceneManager.SetActiveScene(sceneToLoad);
+        SceneManager.UnloadSceneAsync(previousScene.buildIndex);
+        GameManager.Instance.GenerateNewGame(
+            GetMapSize(),
+            GetNumberOfOponents(),
+            GetDifficulty());
     }
 
 }
