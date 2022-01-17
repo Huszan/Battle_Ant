@@ -2,33 +2,36 @@
 
 public class Player
 {
-    public Color Color { get; private set; }
+    public Color32 Color { get; private set; }
     public float Resources { get; private set; }
     public int UnitCount { get; private set; }
+    public int Score { get; private set; }
 
     public Player(
         float resources,
-        int unitCount)
+        int unitCount,
+        int initialScore)
     {
-        Color = new Color(
-            Random.Range(0, 255),
-            Random.Range(0, 255),
-            Random.Range(0, 255)
+        Color = new Color32(
+            (byte)Random.Range(0, 255),
+            (byte)Random.Range(0, 255),
+            (byte)Random.Range(0, 255),
+            255
             );
         Resources = resources;
         UnitCount = unitCount;
+        Score = initialScore;
     }
+
+    public void AddResources(float amount) => Resources += amount;
+    public void SubtractResources(float amount) => Resources -= amount;
+    public void AddPoints(int amount) => Score += amount;
+    public void SubtractPoints(int amount) => Score -= amount;
 
     public int UnitLimit()
     {
-        return (int)(Resources/10);
+        return (int)(Resources/10+5);
     }
-    private void UnitCreated()
-    {
-        UnitCount++;
-    }
-    private void UnitDestroyed()
-    {
-        UnitCount--;
-    }
+    public void UnitCreated() => UnitCount++;
+    public void UnitDestroyed() => UnitCount--;
 }

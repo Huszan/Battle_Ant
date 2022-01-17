@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxColor: {r: 0.23012729, g: 0.6415094, b: 0.057493754, a: 0.78431374}
   fontColor: {r: 1, g: 1, b: 1, a: 1}
-  timeToDestroy: 2
+  timeToDestroy: 1.5

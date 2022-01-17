@@ -9,23 +9,21 @@ public class InfoBarHandler : MonoBehaviour
     public TMP_Text _time;
     public TMP_Text _score;
 
-    private Player player;
-    //private GameManager gm;
-
-    private void Start()
-    {
-        player = 
-            GameObject.FindGameObjectWithTag("Human player")
-            .GetComponent<Player>();
-    }
     private void Update()
     {
-        _antCount.text =
-            player.UnitCount.ToString() + 
-            "/" + 
-            player.UnitLimit().ToString();
-        _resources.text = player.Resources.ToString();
-        _time.text = "THERE WILL BE TIME";
-        _score.text = "THERE WILL BE SCORE";
+        if (GameManager.Instance.GameState != GameState.LOADING && 
+            GameManager.Instance.GameState != GameState.UNDEFINED)
+        {
+            Player player = GameManager.Instance.HumanPlayer;
+            Timer timer = GameManager.Instance.TimePassed;
+
+            _antCount.text =
+                player.UnitCount.ToString() +
+                "/" +
+                player.UnitLimit().ToString();
+            _resources.text = player.Resources.ToString();
+            _time.text = TimeFormatter.GetFullTime(timer.Counter);
+            _score.text = player.Score.ToString();
+        }
     }
 }
