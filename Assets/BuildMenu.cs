@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +13,7 @@ public class BuildMenu : MonoBehaviour
     public GameObject PointerSticker;
 
     private List<GameObject> BuildableBuildings { get; set; }
-    public int CurrentBuldingIndex { get; private set; }
+    private int CurrentBuldingIndex { get; set; }
 
     private void Start()
     {
@@ -42,6 +41,19 @@ public class BuildMenu : MonoBehaviour
             CurrentBuldingIndex--;
     }
 
+    private bool RangeIndicatorToggled = false;
+    public void ToggleRangeIndicator() => RangeIndicatorToggled = !RangeIndicatorToggled;
+    public void ShowRangeIndicator()
+    {
+        foreach (GameObject go in BuildingManager.Instance.BuildRange(GameManager.Instance.Players[0]))
+        {
+            if (!RangeIndicatorToggled)
+                go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;
+            else
+                go.GetComponent<SpriteRenderer>().color = CustomColors.CHOSEN_TILE;
+        }
+    }
+
     private void Update()
     {
         GameObject _building = BuildableBuildings[CurrentBuldingIndex];
@@ -55,6 +67,7 @@ public class BuildMenu : MonoBehaviour
                     _building,
                     GameManager.Instance.Players[0]);
         }
+        ShowRangeIndicator();
     }
     private void Display(GameObject buildingToDisplay)
     {
@@ -70,4 +83,5 @@ public class BuildMenu : MonoBehaviour
             BuildableBuildings[CurrentBuldingIndex].GetComponent<SpriteRenderer>().sprite;
         }
     }
+
 }

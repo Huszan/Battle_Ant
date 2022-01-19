@@ -8,22 +8,13 @@ public class Building : MonoBehaviour
     public float cost;
     public float range;
     public bool buildable;
+    public Player Owner { get; private set; }
+    public GameObject Tile { get; private set; }
+    
+    public Vector2 Position { get; private set; }
+    public void SetPosition(Vector2 pos) => Position = pos;
+    public void SetOwner(Player player) => Owner = player;
 
-    public Player player;
-    public void SetOwner(Player player)
-    {
-        this.player = player;
-        gameObject.transform.GetComponent<SpriteRenderer>().color = player.Color;
-    }
-    public Player GetOwner() => player;
-
-    private bool CanBeBuilt(Player player)
-    {
-        if (cost < player.Resources)
-            return true;
-        else
-            return false;
-    }
     public void Damage(float amount)
     {
         if (amount < hp)
@@ -31,8 +22,6 @@ public class Building : MonoBehaviour
         else
             Kill();
     }
-    private void Kill()
-    {
-        Destroy(transform.gameObject);
-    }
+    private void Kill() => Destroy(transform.gameObject);
+
 }

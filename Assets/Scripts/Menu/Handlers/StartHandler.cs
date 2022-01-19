@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 
 public enum Difficulty
 {
-    EASY = 0,
-    NORMAL = 1,
-    HARD = 2
+    GOD_MODE = 1000000,
+    EASY = 200,
+    NORMAL = 100,
+    HARD = 50
 }
 public class StartHandler : MonoBehaviour
 {

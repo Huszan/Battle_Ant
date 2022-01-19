@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 public class Tilemap : MonoBehaviour
-{  
+{
+    public static Tilemap Instance { get; private set; }
     [Header("Import")]
     [SerializeField]
     private GameObject tileGrass;
@@ -10,6 +11,10 @@ public class Tilemap : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
         TileSize = tileGrass.GetComponent<Renderer>().bounds.size;
     }
 
@@ -19,13 +24,25 @@ public class Tilemap : MonoBehaviour
     public Vector2 TransformSize => new Vector2(
             MapSize.x * TileSize.x,
             MapSize.y * TileSize.y);
-    public GameObject[] Corners() => new GameObject[]
+    public Vector2 TileCoordinates(GameObject searchedTile)
+    {
+        for (int i = 0; i < CreatedTiles.GetLength(0); i++)
+        {
+            for (int j = 0; j < CreatedTiles.GetLength(1); j++)
+            {
+                if (CreatedTiles[i,j] == searchedTile)
+                    return new Vector2(i,j);
+            }
+        }
+        return new Vector2();
+    }
+    public GameObject[] PlayerCorners() => new GameObject[]
     {
         CreatedTiles[1, 1],
         CreatedTiles[(int)MapSize.x-2, (int)MapSize.y-2],
         CreatedTiles[1, (int)MapSize.y-2],
         CreatedTiles[(int)MapSize.x-2, 1]
-    };
+    }; 
     private bool MapSizeIsViable(Vector2 size) => size.x > 0 || size.y > 0;
     private bool MapIsGenerated() => CreatedTiles != null;
     public void SwitchOutline()
@@ -72,7 +89,7 @@ public class Tilemap : MonoBehaviour
                         (float)(j * (TileSize.x) + (TileSize.x / 2)),
                         (float)(i * (TileSize.y * 0.75)), 0);
 
-                tile.name = i.ToString() + "." + j.ToString();
+                tile.name = new Vector2(i,j).ToString();
                 tile.transform.SetParent(transform);
                 CreatedTiles[i, j] = tile;
             }

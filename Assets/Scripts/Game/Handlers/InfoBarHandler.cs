@@ -23,7 +23,7 @@ public class InfoBarHandler : MonoBehaviour
                 player.UnitLimit().ToString();
             _resources.text = player.Resources.ToString();
             _time.text = TimeFormatter.GetFullTime(timer.Counter);
-            _score.text = player.Score.ToString();
+            _score.text = player.Score().ToString();
         }
     }
 }

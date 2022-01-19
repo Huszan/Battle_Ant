@@ -26,14 +26,13 @@ public class GameManager : MonoBehaviour
         GenerateNewGame(
             new Vector2(30, 30),
             1,
-            Difficulty.EASY);
+            Difficulty.GOD_MODE);
     }
 
     public GameState GameState { get; private set; }
     public Difficulty Difficulty { get; private set; }
     public Timer TimePassed { get; private set; }
     public List<Player> Players { get; private set; }
-    public Tilemap Tilemap { get; private set; }
 
     public void GenerateNewGame(
         Vector2 mapSize,
@@ -42,11 +41,8 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.LOADING;
 
+        Tilemap.Instance.GenerateTilemap(mapSize);
         InitializePlayers(numberOfOpponents, difficulty);
-
-        Tilemap = FindTilemap();
-        Tilemap.GenerateTilemap(mapSize);
-
         InitializePlayersAssets();
         // TODO -> Spawn food sources
 
@@ -59,35 +55,12 @@ public class GameManager : MonoBehaviour
     private void InitializePlayers(int numberOfOpponents, Difficulty difficulty)
     {
         Players = new List<Player>();
-        Difficulty = difficulty;
-        switch(difficulty)
-        {
-            case Difficulty.EASY:
-                {
-                    Players.Add(new Player(200, 0, 1000));
-                    break;
-                }
-            case Difficulty.NORMAL:
-                {
-                    Players.Add(new Player(100, 0, 2000));
-                    break;
-                }
-            case Difficulty.HARD:
-                {
-                    Players.Add(new Player(30, 0, 3000));
-                    break;
-                }
-        }
-
-        for (int i = 0; i < numberOfOpponents; i++)
-            Players.Add(
-                new Player(100, 0, 0)
-                );
-        Debug.Log($"Generated {Players.Count} players");
+        for (int i = 0; i < numberOfOpponents + 1; i++)
+            Players.Add(new Player((int)difficulty));
     }
     private void InitializePlayersAssets()
     {
-        var corners = Tilemap.Corners();
+        var corners = Tilemap.Instance.PlayerCorners();
         var mainBuilding = BuildingManager.Instance.buildings[0];
 
         var i = 0;
@@ -96,23 +69,9 @@ public class GameManager : MonoBehaviour
             BuildingManager.Instance.PlaceBuilding(
             corners[i++],
             mainBuilding,
-            player);
+            player,
+            false);
         }
-    }
-    private Tilemap FindTilemap()
-    {
-        GameObject tm = GameObject.FindGameObjectWithTag("Tilemap");
-        if (tm == null)
-        {
-            GameObject _Tilemap = new GameObject
-            {
-                name = "_Tilemap",
-                tag = "tilemap"
-            };
-            _Tilemap.AddComponent<Tilemap>();
-            Debug.Log("Tilemap was created, because it did't exist");
-        }
-        return tm.GetComponent<Tilemap>();
     }
 
 }

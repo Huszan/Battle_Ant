@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, scrollLimit.x, scrollLimit.y);
 
         Vector2 panLimit = 
-            GameManager.Instance.Tilemap.TransformSize;
+            Tilemap.Instance.TransformSize;
         pos.x = Mathf.Clamp(pos.x, 0, panLimit.x);
         pos.y = Mathf.Clamp(pos.y, 0, panLimit.y * 0.75f);
 
