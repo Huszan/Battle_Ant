@@ -53,7 +53,7 @@ public class BuildMenu : MonoBehaviour
                 BuildingManager.Instance.PlaceBuilding(
                     hit.collider.gameObject, 
                     _building,
-                    GameManager.Instance.HumanPlayer);
+                    GameManager.Instance.Players[0]);
         }
     }
     private void Display(GameObject buildingToDisplay)

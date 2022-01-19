@@ -20,20 +20,19 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    /* DELETE ME AFTER DEVELOPMENT!!!
+    /* DELETE ME AFTER DEVELOPMENT!!!*/
     private void Start()
     {
         GenerateNewGame(
             new Vector2(30, 30),
             1,
             Difficulty.EASY);
-    }*/
+    }
 
     public GameState GameState { get; private set; }
     public Difficulty Difficulty { get; private set; }
     public Timer TimePassed { get; private set; }
-    public Player HumanPlayer { get; private set; }
-    public List<Player> AiPlayers { get; private set; }
+    public List<Player> Players { get; private set; }
     public Tilemap Tilemap { get; private set; }
 
     public void GenerateNewGame(
@@ -42,44 +41,63 @@ public class GameManager : MonoBehaviour
         Difficulty difficulty)
     {
         GameState = GameState.LOADING;
+
         InitializePlayers(numberOfOpponents, difficulty);
-        // TODO -> Give players initial buildings
 
         Tilemap = FindTilemap();
         Tilemap.GenerateTilemap(mapSize);
-        GameState = GameState.PLAYING;
-        CameraController.Instance.Toggle();
 
+        InitializePlayersAssets();
+        // TODO -> Spawn food sources
+
+        GameState = GameState.PLAYING;
+
+        CameraController.Instance.Toggle();
         TimePassed.StartCounting();
     }
 
     private void InitializePlayers(int numberOfOpponents, Difficulty difficulty)
     {
+        Players = new List<Player>();
         Difficulty = difficulty;
         switch(difficulty)
         {
             case Difficulty.EASY:
                 {
-                    HumanPlayer = new Player(200, 0, 1000);
+                    Players.Add(new Player(200, 0, 1000));
                     break;
                 }
             case Difficulty.NORMAL:
                 {
-                    HumanPlayer = new Player(100, 0, 2000);
+                    Players.Add(new Player(100, 0, 2000));
                     break;
                 }
             case Difficulty.HARD:
                 {
-                    HumanPlayer = new Player(30, 0, 3000);
+                    Players.Add(new Player(30, 0, 3000));
                     break;
                 }
         }
 
-        AiPlayers = new List<Player>();
         for (int i = 0; i < numberOfOpponents; i++)
-            AiPlayers.Add(
+            Players.Add(
                 new Player(100, 0, 0)
                 );
+        Debug.Log($"Generated {Players.Count} players");
+    }
+    private void InitializePlayersAssets()
+    {
+        var corners = Tilemap.GetCorners();
+        var mainBuilding = BuildingManager.Instance.buildings[0];
+
+        var i = 0;
+        foreach (var player in Players)
+        {
+            BuildingManager.Instance.PlaceBuilding(
+            corners[i++],
+            mainBuilding,
+            player);
+        }
     }
     private Tilemap FindTilemap()
     {

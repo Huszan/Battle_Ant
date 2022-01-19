@@ -8,7 +8,7 @@ public class Tilemap : MonoBehaviour
 
     public Vector2 MapSize { get; private set; }
     public Vector3 TileSize { get; private set; }
-    public GameObject[] CreatedTiles { get; private set; }
+    public GameObject[,] CreatedTiles { get; private set; }
 
     private void Awake()
     {
@@ -17,6 +17,7 @@ public class Tilemap : MonoBehaviour
     public void SetMapSize(Vector2 mapSize)
     {
         MapSize = mapSize;
+        CreatedTiles = new GameObject[(int)mapSize.x, (int)mapSize.y];
     }
     public Vector2 GetTransformSize()
     {
@@ -24,17 +25,20 @@ public class Tilemap : MonoBehaviour
             MapSize.x * TileSize.x,
             MapSize.y * TileSize.y);
     }
+    public GameObject[] GetCorners() => new GameObject[] 
+    { 
+        CreatedTiles[1, 1],
+        CreatedTiles[(int)MapSize.x-2, (int)MapSize.y-2],
+        CreatedTiles[1, (int)MapSize.y-2],
+        CreatedTiles[(int)MapSize.x-2, 1]
+    };
     private void StoreTiles()
     {
-        int tileAmount = (int)MapSize.x * (int)MapSize.y;
-        CreatedTiles = new GameObject[tileAmount];
-
-        int tileCounter = 0;
         for (int i = 0; i < MapSize.y; i++)
         {
             for (int j = 0; j < MapSize.x; j++)
             {
-                CreatedTiles[tileCounter++] = GameObject.Find(i.ToString() + "." + j.ToString());
+                CreatedTiles[i,j] = GameObject.Find(i.ToString() + "." + j.ToString());
             }
         }
     }

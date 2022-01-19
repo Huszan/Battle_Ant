@@ -14,7 +14,7 @@ public class InfoBarHandler : MonoBehaviour
         if (GameManager.Instance.GameState != GameState.LOADING && 
             GameManager.Instance.GameState != GameState.UNDEFINED)
         {
-            Player player = GameManager.Instance.HumanPlayer;
+            Player player = GameManager.Instance.Players[0];
             Timer timer = GameManager.Instance.TimePassed;
 
             _antCount.text =
