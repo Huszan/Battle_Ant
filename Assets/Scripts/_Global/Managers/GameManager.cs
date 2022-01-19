@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     }
     private void InitializePlayersAssets()
     {
-        var corners = Tilemap.GetCorners();
+        var corners = Tilemap.Corners();
         var mainBuilding = BuildingManager.Instance.buildings[0];
 
         var i = 0;
