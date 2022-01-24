@@ -4,13 +4,6 @@ using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public enum Difficulty
-{
-    GOD_MODE = 1000000,
-    EASY = 200,
-    NORMAL = 100,
-    HARD = 50
-}
 public class StartHandler : MonoBehaviour
 {
     [Header("Form")]

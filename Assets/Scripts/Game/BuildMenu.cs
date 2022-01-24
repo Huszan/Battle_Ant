@@ -40,34 +40,26 @@ public class BuildMenu : MonoBehaviour
         else
             CurrentBuldingIndex--;
     }
-
-    private bool RangeIndicatorToggled = false;
     public void ToggleRangeIndicator() => RangeIndicatorToggled = !RangeIndicatorToggled;
-    public void ShowRangeIndicator()
-    {
-        foreach (GameObject go in BuildingManager.Instance.BuildRange(GameManager.Instance.Players[0]))
-        {
-            if (!RangeIndicatorToggled)
-                go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;
-            else
-                go.GetComponent<SpriteRenderer>().color = CustomColors.CHOSEN_TILE;
-        }
-    }
 
     private void Update()
     {
-        GameObject _building = BuildableBuildings[CurrentBuldingIndex];
-        Display(_building);
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (GameManager.Instance.GameState == GameState.PLAYING)
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10), Vector2.zero);
-            if (hit.collider != null && hit.collider.gameObject.tag.Equals("Tile"))
-                BuildingManager.Instance.PlaceBuilding(
-                    hit.collider.gameObject, 
-                    _building,
-                    GameManager.Instance.Players[0]);
+            GameObject _building = BuildableBuildings[CurrentBuldingIndex];
+            Display(_building);
+            ShowRangeIndicator();
+
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10), Vector2.zero);
+                if (hit.collider != null && hit.collider.gameObject.CompareTag("Tile"))
+                    BuildingManager.Instance.PlaceBuilding(
+                        hit.collider.gameObject,
+                        _building,
+                        GameManager.Instance.Players[0]);
+            }
         }
-        ShowRangeIndicator();
     }
     private void Display(GameObject buildingToDisplay)
     {
@@ -83,5 +75,15 @@ public class BuildMenu : MonoBehaviour
             BuildableBuildings[CurrentBuldingIndex].GetComponent<SpriteRenderer>().sprite;
         }
     }
-
+    private bool RangeIndicatorToggled = false;
+    private void ShowRangeIndicator()
+    {
+        foreach (GameObject go in BuildingManager.Instance.BuildRange(GameManager.Instance.Players[0]))
+        {
+            if (!RangeIndicatorToggled)
+                go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;
+            else
+                go.GetComponent<SpriteRenderer>().color = CustomColors.CHOSEN_TILE;
+        }
+    }
 }

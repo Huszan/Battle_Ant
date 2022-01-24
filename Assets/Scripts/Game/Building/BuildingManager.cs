@@ -5,6 +5,7 @@ public class BuildingManager : MonoBehaviour
 {
     [Header("Import")]
     public GameObject[] buildings;
+    public GameObject foodSource;
 
     public static BuildingManager Instance { get; private set; }
 
@@ -37,32 +38,8 @@ public class BuildingManager : MonoBehaviour
     {
         Building buildingPref = buildingGO.GetComponent<Building>();
 
-        if (conditioned)
-        {
-            if (tileGO.GetComponentInChildren<Building>() != null)
-            {
-                PopupManager.Instance.Pop(
-                    PopupManager.PopType.warning,
-                    "You can't place building inside another building");
-                return;
-            }
-            if (buildingPref.cost > player.Resources)
-            {
-                PopupManager.Instance.Pop(
-                    PopupManager.PopType.warning,
-                    "You can't have enough resources");
-                return;
-            }
-            if (!BuildRange(player).Contains(tileGO))
-            {
-                PopupManager.Instance.Pop(
-                    PopupManager.PopType.warning,
-                    "You can't place it here, expand your build range");
-                return;
-            }
-        }
-
-        player.SubtractResources(buildingPref.cost);
+        if (conditioned) 
+            CheckBuildConditions(tileGO, buildingPref, player);
 
         var obj =
         Instantiate(
@@ -75,8 +52,37 @@ public class BuildingManager : MonoBehaviour
 
         building.SetOwner(player);
         building.SetPosition(Tilemap.Instance.TileCoordinates(tileGO));
-        player.Buildings.Add(building);
-        obj.transform.GetComponent<SpriteRenderer>().color = player.Color;
-        Debug.Log($"{building} was created for {player.Color}, it's coordinates -> {building.Position}");
+        if (player != null)
+        {
+            player.SubtractResources(buildingPref.cost);
+            player.Buildings.Add(building);
+            obj.transform.GetComponent<SpriteRenderer>().color = player.Color;
+            Debug.Log($"{building} was created for {player.Color}, it's coordinates -> {building.Position}");
+        }
+    }
+
+    private void CheckBuildConditions(GameObject tileGO, Building buildingPref, Player player)
+    {
+        if (tileGO.GetComponentInChildren<Building>() != null)
+        {
+            PopupManager.Instance.Pop(
+                PopupManager.PopType.warning,
+                "You can't place building inside another building");
+            return;
+        }
+        if (buildingPref.cost > player.Resources)
+        {
+            PopupManager.Instance.Pop(
+                PopupManager.PopType.warning,
+                "You can't have enough resources");
+            return;
+        }
+        if (!BuildRange(player).Contains(tileGO))
+        {
+            PopupManager.Instance.Pop(
+                PopupManager.PopType.warning,
+                "You can't place it here, expand your build range");
+            return;
+        }
     }
 }

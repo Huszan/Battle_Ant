@@ -42,7 +42,14 @@ public class Tilemap : MonoBehaviour
         CreatedTiles[(int)MapSize.x-2, (int)MapSize.y-2],
         CreatedTiles[1, (int)MapSize.y-2],
         CreatedTiles[(int)MapSize.x-2, 1]
-    }; 
+    };
+    public GameObject[] FoodCorners() => new GameObject[]
+{
+        CreatedTiles[0, 0],
+        CreatedTiles[(int)MapSize.x-1, (int)MapSize.y-1],
+        CreatedTiles[1, (int)MapSize.y-1],
+        CreatedTiles[(int)MapSize.x-1, 0]
+};
     private bool MapSizeIsViable(Vector2 size) => size.x > 0 || size.y > 0;
     private bool MapIsGenerated() => CreatedTiles != null;
     public void SwitchOutline()

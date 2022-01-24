@@ -31,10 +31,7 @@ public class Player
     public void AddResources(float amount) => Resources += amount;
     public void SubtractResources(float amount) => Resources -= amount;
 
-    public int UnitLimit()
-    {
-        return (int)(Resources/10+5);
-    }
+    public int UnitLimit() => (int)(Resources / 10 + 5);
     public void UnitCreated() => UnitCount++;
     public void UnitDestroyed() => UnitCount--;
 }
