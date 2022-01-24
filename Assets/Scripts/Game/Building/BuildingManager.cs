@@ -38,8 +38,8 @@ public class BuildingManager : MonoBehaviour
     {
         Building buildingPref = buildingGO.GetComponent<Building>();
 
-        if (conditioned) 
-            CheckBuildConditions(tileGO, buildingPref, player);
+        if (conditioned && !BuildConditionsPassed(tileGO, buildingPref, player))
+            return;
 
         var obj =
         Instantiate(
@@ -61,28 +61,29 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    private void CheckBuildConditions(GameObject tileGO, Building buildingPref, Player player)
+    private bool BuildConditionsPassed(GameObject tileGO, Building buildingPref, Player player)
     {
         if (tileGO.GetComponentInChildren<Building>() != null)
         {
             PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,
                 "You can't place building inside another building");
-            return;
+            return false;
         }
         if (buildingPref.cost > player.Resources)
         {
             PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,
                 "You can't have enough resources");
-            return;
+            return false;
         }
         if (!BuildRange(player).Contains(tileGO))
         {
             PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,
                 "You can't place it here, expand your build range");
-            return;
+            return false;
         }
+        return true;
     }
 }

@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     public void StartCounting() => IsCounting = true;
     public void StopCounting() => IsCounting = false;
     public void ResetCounter() => Counter = 0f;
-    public bool ReachedTreshold(float treshold) => Counter <= treshold;
+    public bool ReachedTreshold(float treshold) => Counter >= treshold;
 
     private void Update()
     {

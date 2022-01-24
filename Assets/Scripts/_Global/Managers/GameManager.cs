@@ -33,13 +33,14 @@ public class GameManager : MonoBehaviour
         GenerateNewGame(
             new Vector2(30, 30),
             1,
-            Difficulty.GOD_MODE);
+            Difficulty.HARD);
     }
 
     public GameState GameState { get; private set; }
     public Difficulty Difficulty { get; private set; }
     public Timer TimePassed { get; private set; }
     public List<Player> Players { get; private set; }
+    public Player HumanPlayer => Players[0];
 
     [Header("Food spawning")]
     [Range(0.05f, 0.50f)]

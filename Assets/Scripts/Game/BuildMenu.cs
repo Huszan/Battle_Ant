@@ -57,7 +57,7 @@ public class BuildMenu : MonoBehaviour
                     BuildingManager.Instance.PlaceBuilding(
                         hit.collider.gameObject,
                         _building,
-                        GameManager.Instance.Players[0]);
+                        GameManager.Instance.HumanPlayer);
             }
         }
     }
@@ -78,7 +78,7 @@ public class BuildMenu : MonoBehaviour
     private bool RangeIndicatorToggled = false;
     private void ShowRangeIndicator()
     {
-        foreach (GameObject go in BuildingManager.Instance.BuildRange(GameManager.Instance.Players[0]))
+        foreach (GameObject go in BuildingManager.Instance.BuildRange(GameManager.Instance.HumanPlayer))
         {
             if (!RangeIndicatorToggled)
                 go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;

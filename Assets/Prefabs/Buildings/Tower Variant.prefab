@@ -32,6 +32,12 @@ PrefabInstance:
       propertyPath: buildable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
+        type: 3}
+      propertyPath: _description
+      value: Tall and powerful. It will expand territory by 3 tiles and send ants
+        to attack nearby opponents.
+      objectReference: {fileID: 0}
     - target: {fileID: 9205425883452535586, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
       propertyPath: m_Sprite

@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4880387886756712229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373725067294893339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46bb5943947b81c4495120c29c56528d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRatePerMinute: 20
+  timer: {fileID: 2232765335264587656}
+--- !u!114 &2232765335264587656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3373725067294893339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd8c121e5912d7419bfd57784ea725f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5841695397276194366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,12 +51,17 @@ PrefabInstance:
     - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
       propertyPath: range
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
       propertyPath: cost
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
+        type: 3}
+      propertyPath: _description
+      value: It will create ants and send them to forage nearby resource piles
       objectReference: {fileID: 0}
     - target: {fileID: 9205425883452535586, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
@@ -109,3 +140,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f, type: 3}
+--- !u!1 &3373725067294893339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9205425883452535589, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5841695397276194366}
+  m_PrefabAsset: {fileID: 0}
