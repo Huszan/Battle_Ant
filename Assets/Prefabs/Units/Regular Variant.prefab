@@ -65,7 +65,12 @@ PrefabInstance:
     - target: {fileID: 6310665902882103449, guid: 9ceb6d53a416d614e876da157a558a6a,
         type: 3}
       propertyPath: m_Name
-      value: Regular
+      value: Regular Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7594290534763582300, guid: 9ceb6d53a416d614e876da157a558a6a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8861027150600253015, guid: 9ceb6d53a416d614e876da157a558a6a,
         type: 3}

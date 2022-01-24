@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
@@ -17,23 +18,6 @@ public class BuildingManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public List<GameObject> BuildRange(Player player)
-    {
-        var tiles = Tilemap.Instance.CreatedTiles;
-        var tilesInRange = new List<GameObject>();
-        foreach (Building building in player.Buildings)
-        {
-            for (int i = (int)building.Position.x - (int)building.range; i <= building.range + (int)building.Position.x; i++)
-            {
-                for (int j = (int)building.Position.y - (int)building.range; j <= building.range + (int)building.Position.y; j++)
-                {
-                    if (i >= 0 && j >= 0 && i < tiles.GetLength(0) && j < tiles.GetLength(1) && !tilesInRange.Contains(tiles[i, j]))
-                        tilesInRange.Add(tiles[i, j]);
-                }
-            }
-        }
-        return tilesInRange;
-    }
     public void PlaceBuilding(GameObject tileGO, GameObject buildingGO, Player player, bool conditioned = true)
     {
         Building buildingPref = buildingGO.GetComponent<Building>();
@@ -77,7 +61,7 @@ public class BuildingManager : MonoBehaviour
                 "You can't have enough resources");
             return false;
         }
-        if (!BuildRange(player).Contains(tileGO))
+        if (!player.BuildRange().Contains(tileGO))
         {
             PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,

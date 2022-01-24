@@ -33,8 +33,6 @@ public class UnitSpawner : MonoBehaviour
         go.transform.position = transform.position;
         unit.SetOwner(SpawningBuilding.Owner);
         SpawningBuilding.Owner.UnitCreated();
-
-        Debug.Log($"{unit.name} created for {SpawningBuilding.Owner.Color}");
     }
 
 }

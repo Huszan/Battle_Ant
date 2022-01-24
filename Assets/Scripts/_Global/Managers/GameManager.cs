@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
             new Vector2(30, 30),
             1,
             Difficulty.HARD);
+        Debug.Log($"Map size -> {Tilemap.Instance.MapSize}\n" +
+            $"List size -> {Tilemap.Instance.CreatedTiles.GetLength(0)},{Tilemap.Instance.CreatedTiles.GetLength(1)}");
     }
 
     public GameState GameState { get; private set; }
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < enemiesCount; i++)
             Players.Add(new Player(200f));
     }
+
     private void InitializePlayersAssets()
     {
         var corners = Tilemap.Instance.PlayerCorners();
@@ -110,6 +113,7 @@ public class GameManager : MonoBehaviour
             false);
         }
     }
+
     private void SpawnFoodSources()
     {
         var tilemap = Tilemap.Instance;

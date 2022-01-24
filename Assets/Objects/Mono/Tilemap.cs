@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Tilemap : MonoBehaviour
 {
@@ -50,6 +51,28 @@ public class Tilemap : MonoBehaviour
         CreatedTiles[1, (int)MapSize.y-1],
         CreatedTiles[(int)MapSize.x-1, 0]
 };
+
+    public List<GameObject> TilesInRange(Vector2 pos, int range)
+    {
+        var tiles = new List<GameObject>();
+        for (int i = (int)pos.x - range; i <= range + (int)pos.x; i++)
+            for (int j = (int)pos.y - range; j <= range + (int)pos.y; j++)
+                if (PositionExists(new Vector2(i,j)))
+                    tiles.Add(CreatedTiles[i, j]);
+        return tiles;
+    }
+    public List<GameObject> GetTilesFromPositions(List<Vector2> positions)
+    {
+        List<GameObject> tiles = new List<GameObject>();
+        foreach (Vector2 pos in positions)
+        {
+            if (PositionExists(pos))
+                tiles.Add(CreatedTiles[
+                    (int)pos.x, (int)pos.y]);
+        }
+        return tiles;
+    }
+    private bool PositionExists(Vector2 pos) => pos.x >= 0 && pos.y >= 0 && pos.x < MapSize.x && pos.y < MapSize.y;
     private bool MapSizeIsViable(Vector2 size) => size.x > 0 || size.y > 0;
     private bool MapIsGenerated() => CreatedTiles != null;
     public void SwitchOutline()

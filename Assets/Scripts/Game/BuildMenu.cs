@@ -12,6 +12,7 @@ public class BuildMenu : MonoBehaviour
     public TMP_Text buildingCostField;
     public GameObject PointerSticker;
 
+    private Player PlayerServiced { get; set; }
     private List<GameObject> BuildableBuildings { get; set; }
     private int CurrentBuldingIndex { get; set; }
 
@@ -40,15 +41,21 @@ public class BuildMenu : MonoBehaviour
         else
             CurrentBuldingIndex--;
     }
-    public void ToggleRangeIndicator() => RangeIndicatorToggled = !RangeIndicatorToggled;
+    public void ToggleRangeIndicator()
+    {
+        RangeIndicatorToggled = !RangeIndicatorToggled;
+        HideRangeIndicator();
+    }
 
     private void Update()
     {
         if (GameManager.Instance.GameState == GameState.PLAYING)
         {
+            PlayerServiced = GameManager.Instance.HumanPlayer;
             GameObject _building = BuildableBuildings[CurrentBuldingIndex];
             Display(_building);
-            ShowRangeIndicator();
+            if (RangeIndicatorToggled)
+                ShowRangeIndicator();
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
@@ -57,7 +64,7 @@ public class BuildMenu : MonoBehaviour
                     BuildingManager.Instance.PlaceBuilding(
                         hit.collider.gameObject,
                         _building,
-                        GameManager.Instance.HumanPlayer);
+                        PlayerServiced);
             }
         }
     }
@@ -78,12 +85,12 @@ public class BuildMenu : MonoBehaviour
     private bool RangeIndicatorToggled = false;
     private void ShowRangeIndicator()
     {
-        foreach (GameObject go in BuildingManager.Instance.BuildRange(GameManager.Instance.HumanPlayer))
-        {
-            if (!RangeIndicatorToggled)
-                go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;
-            else
-                go.GetComponent<SpriteRenderer>().color = CustomColors.CHOSEN_TILE;
-        }
+        foreach (GameObject go in PlayerServiced.BuildRange())
+            go.GetComponent<SpriteRenderer>().color = CustomColors.CHOSEN_TILE;
+    }
+    private void HideRangeIndicator()
+    {
+        foreach (GameObject go in PlayerServiced.BuildRange())
+            go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player
@@ -35,4 +36,14 @@ public class Player
     public bool UnitLimitReached() => UnitCount >= UnitLimit();
     public void UnitCreated() => UnitCount++;
     public void UnitDestroyed() => UnitCount--;
+
+    public List<GameObject> BuildRange()
+    {
+        var tilesInRange = new List<GameObject>();
+        foreach (Building building in Buildings)
+            tilesInRange.AddRange(
+                Tilemap.Instance.TilesInRange(building.Position, building.range));
+        tilesInRange = tilesInRange.Distinct().ToList();
+        return tilesInRange;
+    }
 }
