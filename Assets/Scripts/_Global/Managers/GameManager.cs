@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         GenerateNewGame(
             new Vector2(30, 30),
             1,
-            Difficulty.HARD);
+            Difficulty.EASY);
         Debug.Log($"Map size -> {Tilemap.Instance.MapSize}\n" +
             $"List size -> {Tilemap.Instance.CreatedTiles.GetLength(0)},{Tilemap.Instance.CreatedTiles.GetLength(1)}");
     }
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
                 Players.Add(new Player(200f));
                 break;
             case (Difficulty.HARD):
-                Players.Add(new Player(100f));
+                Players.Add(new Player(0f));
                 break;
             case (Difficulty.GOD_MODE):
                 Players.Add(new Player(100000f));

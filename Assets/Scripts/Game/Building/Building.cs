@@ -14,6 +14,19 @@ public class Building : MonoBehaviour
     public Vector2 Position { get; private set; }
     public void SetPosition(Vector2 pos) => Position = pos;
     public void SetOwner(Player player) => Owner = player;
+    public List<GameObject> TilesInRange() => Tilemap.Instance.TilesInRange(Position, range);
+    public GameObject ClosestResources()
+    {
+        foreach (GameObject tile in TilesInRange())
+        {
+            Building building = tile.GetComponentInChildren<Building>();
+            if (
+                building != null && 
+                building._name.Equals(BuildingManager.Instance.foodSource.GetComponent<Building>()._name))
+                return tile;
+        }
+        return null;
+    }
 
     public void Damage(float amount)
     {

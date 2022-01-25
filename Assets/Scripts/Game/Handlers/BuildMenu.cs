@@ -57,7 +57,7 @@ public class BuildMenu : MonoBehaviour
             if (RangeIndicatorToggled)
                 ShowRangeIndicator();
 
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (Input.GetKeyDown(KeyCode.Mouse1) && RangeIndicatorToggled)
             {
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10), Vector2.zero);
                 if (hit.collider != null && hit.collider.gameObject.CompareTag("Tile"))

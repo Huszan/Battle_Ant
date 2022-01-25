@@ -13182,6 +13182,7 @@ GameObject:
   - component: {fileID: 1825427257}
   - component: {fileID: 1825427256}
   - component: {fileID: 1825427254}
+  - component: {fileID: 1825427255}
   - component: {fileID: 1825427253}
   - component: {fileID: 1825427252}
   m_Layer: 0
@@ -13234,6 +13235,19 @@ MonoBehaviour:
   popupBoxPrefab: {fileID: 2032080783588759472, guid: 568935317321770458c049da20b9910d,
     type: 3}
   popupFrame: {fileID: 1145036419}
+--- !u!114 &1825427255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825427251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3733a58dba06d4caaf4fe8f26b7e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: {x: -1, y: 1}
 --- !u!114 &1825427256
 MonoBehaviour:
   m_ObjectHideFlags: 0
