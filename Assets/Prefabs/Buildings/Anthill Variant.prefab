@@ -24,7 +24,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bb5943947b81c4495120c29c56528d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRatePerMinute: 60
+  spawnRatePerMinute: 120
   timer: {fileID: 5715383921468611780}
 --- !u!1001 &4185045156916548731
 PrefabInstance:
