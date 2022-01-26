@@ -7,6 +7,7 @@ public enum GameState
     LOADING = 1,
     PAUSED = 2,
     PLAYING = 3,
+    BUILD_MODE = 4
 }
 public enum Difficulty
 {
@@ -25,17 +26,6 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-    }
-
-    /* DELETE ME AFTER DEVELOPMENT!!!*/
-    private void Start()
-    {
-        GenerateNewGame(
-            new Vector2(30, 30),
-            1,
-            Difficulty.GOD_MODE);
-        Debug.Log($"Map size -> {Tilemap.Instance.MapSize}\n" +
-            $"List size -> {Tilemap.Instance.CreatedTiles.GetLength(0)},{Tilemap.Instance.CreatedTiles.GetLength(1)}");
     }
 
     public GameState GameState { get; private set; }

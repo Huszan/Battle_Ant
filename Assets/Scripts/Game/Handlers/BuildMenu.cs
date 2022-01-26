@@ -15,9 +15,11 @@ public class BuildMenu : MonoBehaviour
     private Player PlayerServiced { get; set; }
     private List<GameObject> BuildableBuildings { get; set; }
     private int CurrentBuldingIndex { get; set; }
+    private bool Active { get; set; }
 
     private void Start()
     {
+        Active = false;
         BuildableBuildings = new List<GameObject>();
         foreach (GameObject _building in BuildingManager.Instance.buildings)
         {
@@ -27,6 +29,7 @@ public class BuildMenu : MonoBehaviour
         CurrentBuldingIndex = 0;
     }
 
+    public void Activate() => Active = !Active;
     public void NextBuilding()
     {
         if (CurrentBuldingIndex == BuildableBuildings.Count-1)
@@ -41,23 +44,17 @@ public class BuildMenu : MonoBehaviour
         else
             CurrentBuldingIndex--;
     }
-    public void ToggleRangeIndicator()
-    {
-        RangeIndicatorToggled = !RangeIndicatorToggled;
-        HideRangeIndicator();
-    }
 
     private void Update()
     {
-        if (GameManager.Instance.GameState == GameState.PLAYING)
+        if (GameManager.Instance.GameState == GameState.PLAYING && Active)
         {
             PlayerServiced = GameManager.Instance.HumanPlayer;
             GameObject _building = BuildableBuildings[CurrentBuldingIndex];
             Display(_building);
-            if (RangeIndicatorToggled)
-                ShowRangeIndicator();
+            ShowRangeIndicator();
 
-            if (Input.GetKeyDown(KeyCode.Mouse1) && RangeIndicatorToggled)
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10), Vector2.zero);
                 if (hit.collider != null && hit.collider.gameObject.CompareTag("Tile"))
@@ -82,13 +79,12 @@ public class BuildMenu : MonoBehaviour
             BuildableBuildings[CurrentBuldingIndex].GetComponent<SpriteRenderer>().sprite;
         }
     }
-    private bool RangeIndicatorToggled = false;
     private void ShowRangeIndicator()
     {
         foreach (GameObject go in PlayerServiced.BuildRange())
             go.GetComponent<SpriteRenderer>().color = CustomColors.CHOSEN_TILE;
     }
-    private void HideRangeIndicator()
+    public void HideRangeIndicator()
     {
         foreach (GameObject go in PlayerServiced.BuildRange())
             go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;

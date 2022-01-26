@@ -5573,7 +5573,7 @@ PrefabInstance:
     - target: {fileID: 4679869654175600306, guid: b0bd4ffbb80359440b6f871ab199cf8c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4679869654175600306, guid: b0bd4ffbb80359440b6f871ab199cf8c,
         type: 3}
@@ -5658,7 +5658,7 @@ PrefabInstance:
     - target: {fileID: 4679869654175600306, guid: b0bd4ffbb80359440b6f871ab199cf8c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ToggleRangeIndicator
+      value: HideRangeIndicator
       objectReference: {fileID: 0}
     - target: {fileID: 4679869654175600306, guid: b0bd4ffbb80359440b6f871ab199cf8c,
         type: 3}
@@ -5679,6 +5679,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679869654175600306, guid: b0bd4ffbb80359440b6f871ab199cf8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 641759007}
+    - target: {fileID: 4679869654175600306, guid: b0bd4ffbb80359440b6f871ab199cf8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: Activate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679869654175600306, guid: b0bd4ffbb80359440b6f871ab199cf8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9117724360498364285, guid: b0bd4ffbb80359440b6f871ab199cf8c,
         type: 3}
@@ -6459,7 +6474,7 @@ PrefabInstance:
     - target: {fileID: 7508977470579224088, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ToggleRangeIndicator
+      value: Activate
       objectReference: {fileID: 0}
     - target: {fileID: 7508977470579224088, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3,
         type: 3}
@@ -6470,6 +6485,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508977470579224088, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508977470579224088, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508977470579224088, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 641759005}
+    - target: {fileID: 7508977470579224088, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508977470579224088, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f8c55ef74c7b40429ac173b1ab5a8a3, type: 3}
@@ -13796,7 +13836,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -14984,7 +15024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2039567423
 Transform:
   m_ObjectHideFlags: 0
