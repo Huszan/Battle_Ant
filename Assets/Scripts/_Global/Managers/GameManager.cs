@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -56,6 +58,36 @@ public class GameManager : MonoBehaviour
 
         CameraController.Instance.Toggle();
         TimePassed.StartCounting();
+    }
+
+    public void FinishGame(int index)
+    {
+        GameState = GameState.LOADING;
+        StartCoroutine(FinishGameAsync(index));
+    }
+
+    private IEnumerator FinishGameAsync(int index)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
+        Scene sceneToLoad = SceneManager.GetSceneByBuildIndex(index);
+        operation.allowSceneActivation = false;
+
+        while (operation.progress < 0.9f)
+        {
+            Debug.Log("Loading " + operation.progress + "%");
+            yield return null;
+        }
+        operation.allowSceneActivation = true;
+
+        while (!operation.isDone)
+        {
+            Debug.Log("Loading " + operation.progress + "%");
+            yield return null;
+        }
+
+        Scene previousScene = SceneManager.GetActiveScene();
+        SceneManager.SetActiveScene(sceneToLoad);
+        SceneManager.UnloadSceneAsync(previousScene.buildIndex);
     }
 
     private void InitializePlayers(int enemiesCount, Difficulty difficulty)

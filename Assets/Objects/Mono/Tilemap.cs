@@ -103,6 +103,7 @@ public class Tilemap : MonoBehaviour
         }
         /* Create, rename, set parent and store tiles */
         CreatedTiles = new GameObject[(int)mapSize.x, (int)mapSize.y];
+        Debug.Log($"{CreatedTiles.GetLength(0)},{CreatedTiles.GetLength(1)}");
         for (int i = 0; i < mapSize.y; i++)
         {
             for (int j = 0; j < mapSize.x; j++)
@@ -121,7 +122,7 @@ public class Tilemap : MonoBehaviour
 
                 tile.name = new Vector2(i,j).ToString();
                 tile.transform.SetParent(transform);
-                CreatedTiles[i, j] = tile;
+                CreatedTiles[j, i] = tile;
             }
         }
         Debug.Log("Map was created");
