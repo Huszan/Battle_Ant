@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8221573196457485995, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
       propertyPath: _name
@@ -15,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
       propertyPath: hp
-      value: 500000
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 9205425883452535586, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
@@ -106,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 9205425883452535589, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
       propertyPath: m_Name
-      value: FoodSource
+      value: FoodSource Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f, type: 3}

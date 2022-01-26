@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7971352788154084458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707082535091556893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0ffcdf0087d5e4aa02d70299cbae46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildingShooting: {fileID: 707082535091556888}
+  damage: 2
+  shotsPerMinute: 60
 --- !u!1001 &8507354398121009464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,3 +131,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f, type: 3}
+--- !u!1 &707082535091556893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9205425883452535589, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8507354398121009464}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &707082535091556888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8507354398121009464}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707082535091556893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eb0c3eb7417111409678fa0e4fb91d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

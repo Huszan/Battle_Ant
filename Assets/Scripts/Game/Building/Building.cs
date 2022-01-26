@@ -15,7 +15,7 @@ public class Building : MonoBehaviour
     public void SetPosition(Vector2 pos) => Position = pos;
     public void SetOwner(Player player) => Owner = player;
     public List<GameObject> TilesInRange() => Tilemap.Instance.TilesInRange(Position, range);
-    public GameObject ClosestResources()
+    public GameObject FindClosestResources()
     {
         foreach (GameObject tile in TilesInRange())
         {

@@ -22,7 +22,7 @@ public class UnitSpawner : MonoBehaviour
         if (
             timer.ReachedTreshold(60 / spawnRatePerMinute) && 
             !SpawningBuilding.Owner.UnitLimitReached() && 
-            SpawningBuilding.ClosestResources() != null)
+            SpawningBuilding.FindClosestResources() != null)
         {
             SpawnUnit();
             timer.ResetCounter();
@@ -34,7 +34,7 @@ public class UnitSpawner : MonoBehaviour
         var unit = UnitFactory.GetNewInstance();
         unit.gameObject.transform.position = transform.position;
         unit.SetOwner(SpawningBuilding.Owner);
-        unit.SetJob(new WorkerJob(SpawningBuilding.ClosestResources().transform.position, unit));
+        unit.SetJob(new WorkerJob(SpawningBuilding.FindClosestResources().transform.position, unit));
         SpawningBuilding.Owner.UnitCreated();
     }
     //SpawningBuilding.ClosestResource()

@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         GenerateNewGame(
             new Vector2(30, 30),
             1,
-            Difficulty.EASY);
+            Difficulty.GOD_MODE);
         Debug.Log($"Map size -> {Tilemap.Instance.MapSize}\n" +
             $"List size -> {Tilemap.Instance.CreatedTiles.GetLength(0)},{Tilemap.Instance.CreatedTiles.GetLength(1)}");
     }
