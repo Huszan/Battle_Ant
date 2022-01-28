@@ -42,25 +42,20 @@ public class CameraController : MonoBehaviour
         Vector3 pos = transform.position;
 
         if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
-        {
             pos.y += currentSpeed * Time.deltaTime;
-        }
         if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
-        {
             pos.y -= currentSpeed * Time.deltaTime;
-        }
         if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
-        {
             pos.x += currentSpeed * Time.deltaTime;
-        }
         if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
-        {
             pos.x -= currentSpeed * Time.deltaTime;
-        }
+
+        Vector3 mouseMovement = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0) * (mainCamera.orthographicSize/26);
+        if (Input.GetKey(KeyCode.Mouse2))
+            pos -= mouseMovement;
+
         if (Input.GetKey(KeyCode.LeftShift))
-        {
             currentSpeed = panSpeed * panSpeedMultiplayer;
-        }
         else
             currentSpeed = panSpeed;
 
