@@ -9,14 +9,15 @@ public enum GameState
     LOADING = 1,
     PAUSED = 2,
     PLAYING = 3,
-    BUILD_MODE = 4
+    FINISHED_WON = 4,
+    FINISHED_LOST = 5,
 }
 public enum Difficulty
 {
-    EASY,
-    NORMAL,
-    HARD,
-    GOD_MODE
+    EASY = 0,
+    NORMAL = 1,
+    HARD = 2,
+    GOD_MODE = 3
 }
 public class GameManager : MonoBehaviour
 {
@@ -33,9 +34,13 @@ public class GameManager : MonoBehaviour
     public GameState GameState { get; private set; }
     public Difficulty Difficulty { get; private set; }
     public Timer TimePassed { get; private set; }
-    public List<Player> Players { get; private set; }
-    public Player HumanPlayer => Players[0];
+    public Player HumanPlayer { get; private set; }
+    public List<Player> AiPlayers { get; private set; }
 
+    [Header("End game screen")]
+    public GameObject Curtain;
+    public GameObject GameWonScreen;
+    public GameObject GameLostScreen;
     [Header("Food spawning")]
     [Range(0.05f, 0.50f)]
     public float foodPercentage;
@@ -62,8 +67,8 @@ public class GameManager : MonoBehaviour
 
     public void FinishGame(int index)
     {
-        GameState = GameState.LOADING;
         StartCoroutine(FinishGameAsync(index));
+        GameState = GameState.UNDEFINED;
     }
 
     private IEnumerator FinishGameAsync(int index)
@@ -92,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializePlayers(int enemiesCount, Difficulty difficulty)
     {
-        Players = new List<Player>();
+        AiPlayers = new List<Player>();
         InitializeLocalPlayer(difficulty);
         InitializeAiPlayers(enemiesCount);
     }
@@ -101,32 +106,36 @@ public class GameManager : MonoBehaviour
         switch (difficulty)
         {
             case (Difficulty.EASY):
-                Players.Add(new Player(300f));
+                HumanPlayer = new Player(300f);
                 break;
             case (Difficulty.NORMAL):
-                Players.Add(new Player(200f));
+                HumanPlayer = new Player(200f);
                 break;
             case (Difficulty.HARD):
-                Players.Add(new Player(0f));
+                HumanPlayer = new Player(0f);
                 break;
             case (Difficulty.GOD_MODE):
-                Players.Add(new Player(100000f));
+                HumanPlayer = new Player(100000f);
                 break;
         }
     }
     private void InitializeAiPlayers(int enemiesCount)
     {
         for (int i = 0; i < enemiesCount; i++)
-            Players.Add(new Player(200f));
+            AiPlayers.Add(new Player(200f));
     }
-
     private void InitializePlayersAssets()
     {
         var corners = Tilemap.Instance.PlayerCorners();
         var mainBuilding = BuildingManager.Instance.buildings[0];
 
         var i = 0;
-        foreach (var player in Players)
+        BuildingManager.Instance.PlaceBuilding(
+            corners[i++],
+            mainBuilding,
+            HumanPlayer,
+            false);
+        foreach (var player in AiPlayers)
         {
             BuildingManager.Instance.PlaceBuilding(
             corners[i++],
@@ -135,7 +144,6 @@ public class GameManager : MonoBehaviour
             false);
         }
     }
-
     private void SpawnFoodSources()
     {
         var tilemap = Tilemap.Instance;
@@ -177,6 +185,43 @@ public class GameManager : MonoBehaviour
                         count = 0;
                     }
                 }
+            }
+        }
+    }
+
+    public void ClearFromGame(Player player)
+    {
+        foreach (Building building in player.Buildings)
+            Destroy(building.gameObject);
+        AiPlayers.Remove(player);
+    }
+
+    private void Update()
+    {
+        if (GameState == GameState.PLAYING)
+        {
+            if (HumanPlayer.Defeated())
+            {
+                GameState = GameState.FINISHED_LOST;
+                Curtain.SetActive(true);
+                GameLostScreen.SetActive(true);
+            }
+
+            if (AiPlayers.Count <= 0)
+            {
+                GameState = GameState.FINISHED_WON;
+                Curtain.SetActive(true);
+                GameWonScreen.SetActive(true);
+            }
+            else
+            {
+                Debug.Log($"There is {AiPlayers.Count} players");
+                foreach (Player player in AiPlayers.ToArray())
+                    if (player.Defeated())
+                    {
+                        Debug.Log($"{player} was defeated");
+                        ClearFromGame(player);
+                    }
             }
         }
     }

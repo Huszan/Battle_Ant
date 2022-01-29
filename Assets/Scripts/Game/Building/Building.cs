@@ -35,6 +35,10 @@ public class Building : MonoBehaviour
         else
             Kill();
     }
-    private void Kill() => Destroy(transform.gameObject);
+    private void Kill()
+    {
+        Owner.Buildings.Remove(this);
+        Destroy(transform.gameObject);
+    }
 
 }

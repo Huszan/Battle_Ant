@@ -7,7 +7,7 @@ using Mono.Data.Sqlite;
 
 public static class DatabaseManager
 {
-    private static string dbName = "URI=file:mainDB.db";
+    internal static readonly string dbName = "URI=file:mainDB.db";
 
     public static List<User> GetUsers()
     {
@@ -45,8 +45,6 @@ public static class DatabaseManager
     }
     public static string GetUsername(int id)
     {
-        List<int> listOfUsers = new List<int>();
-
         using (var connection = new SqliteConnection(dbName))
         {
             connection.Open();
@@ -54,14 +52,14 @@ public static class DatabaseManager
             using (var command = connection.CreateCommand())
             {
                 command.CommandText =
-                    "SELECT * FROM User;";
+                    "SELECT id, name FROM User;";
 
                 using (IDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        if (id == (int)reader["id"])
-                            return (string)reader["name"];
+                        if (id == reader.GetInt32(0))
+                            return (string)reader[1];
                     }
                     reader.Close();
                 }
@@ -69,6 +67,31 @@ public static class DatabaseManager
             connection.Close();
         }
 
+        return null;
+    }
+    public static int? GetUidByName(string name)
+    {
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText =
+                    "SELECT id, name FROM User;";
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        if (name.Equals((string)reader["name"]))
+                            return reader.GetInt32(0);
+                    }
+                    reader.Close();
+                }
+            }
+            connection.Close();
+        }
         return null;
     }
     public static void AddUser(string username)
@@ -240,6 +263,59 @@ public static class DatabaseManager
         }
 
         return null;
+    }
+
+    public static void AddHighscore(Highscore highscore)
+    {
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText =
+
+                    "BEGIN TRANSACTION;" +
+
+                    "INSERT OR ROLLBACK INTO Highscore(points, user_id) " +
+                    "VALUES('" + highscore.Score + "', '" + highscore.Uid + "'); " +
+
+                    "COMMIT TRANSACTION;";
+
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+        }
+    }
+    public static List<Highscore> GetAllHighscores()
+    {
+        var list = new List<Highscore>();
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText =
+                    "SELECT points, user_id FROM Highscore;";
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    
+                    while (reader.Read())
+                    {
+                        list.Add(
+                            new Highscore(
+                                reader.GetInt32(0),
+                                reader.GetInt32(1)));
+                    }
+                    reader.Close();
+                }
+            }
+            connection.Close();
+        }
+        list.Sort((hs1, hs2) => hs2.Score.CompareTo(hs1.Score));
+        return list;
     }
 
 }

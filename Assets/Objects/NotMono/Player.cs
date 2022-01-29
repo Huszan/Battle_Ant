@@ -8,6 +8,16 @@ public class Player
     public float Resources { get; private set; }
     public int UnitCount { get; private set; }
     public List<Building> Buildings { get; private set; }
+    public bool Defeated()
+    {
+        if (Buildings.Count <= 0) return true;
+        foreach (Building building in Buildings)
+        {
+            if (building.buildable == false)
+                return false;
+        }
+        return true;
+    }
 
     public Player(float startingResources)
     {
@@ -26,8 +36,9 @@ public class Player
     {
         int score = 0;
         foreach (Building building in Buildings)
-            score += (int)building.cost * 2;
-        return score;
+            score += (int)building.cost;
+        score += (int)Resources/5;
+        return score * ((int)GameManager.Instance.Difficulty+1);
     }
     public void AddResources(float amount) => Resources += amount;
     public void SubtractResources(float amount) => Resources -= amount;
@@ -46,4 +57,5 @@ public class Player
         tilesInRange = tilesInRange.Distinct().ToList();
         return tilesInRange;
     }
+
 }
