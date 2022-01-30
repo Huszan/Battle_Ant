@@ -17,11 +17,8 @@ public class CameraController : MonoBehaviour
     public float scrollSpeed = 2f;
     public Vector2 scrollLimit = new Vector2(10, 20);
 
-    private bool CanMove = false;
     private Camera mainCamera;
     private float currentSpeed;
-
-    public void Toggle() => CanMove = !CanMove;
 
     private void Start()
     {
@@ -33,7 +30,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (CanMove)
+        if (CanMove())
             ManageCameraMovement();
     }
 
@@ -70,6 +67,13 @@ public class CameraController : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, 0, panLimit.y * 0.75f);
 
         transform.position = pos;
+    }
+    private bool CanMove()
+    {
+        if (GameManager.Instance.GameState == GameState.PLAYING)
+            return true;
+        else
+            return false;
     }
 
 }

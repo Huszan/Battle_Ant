@@ -6,8 +6,15 @@ public class Player
 {
     public Color32 Color { get; private set; }
     public float Resources { get; private set; }
-    public int UnitCount { get; private set; }
     public List<Building> Buildings { get; private set; }
+    public int UnitCount()
+    {
+        int count = 0;
+        foreach (Building building in Buildings)
+            foreach (Transform child in building.gameObject.transform)
+                if (child.tag.Equals("Unit")) count++;
+        return count;
+    }
     public bool Defeated()
     {
         if (Buildings.Count <= 0) return true;
@@ -28,7 +35,6 @@ public class Player
             255
             );
         Resources = startingResources;
-        UnitCount = 0;
         Buildings = new List<Building>();
     }
 
@@ -44,9 +50,7 @@ public class Player
     public void SubtractResources(float amount) => Resources -= amount;
 
     public int UnitLimit() => (int)(Resources / 10 + 5);
-    public bool UnitLimitReached() => UnitCount >= UnitLimit();
-    public void UnitCreated() => UnitCount++;
-    public void UnitDestroyed() => UnitCount--;
+    public bool UnitLimitReached() => UnitCount() >= UnitLimit();
 
     public List<GameObject> BuildRange()
     {

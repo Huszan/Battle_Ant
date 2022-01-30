@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
 
         GameState = GameState.PLAYING;
 
-        CameraController.Instance.Toggle();
         TimePassed.StartCounting();
     }
 
@@ -224,6 +223,8 @@ public class GameManager : MonoBehaviour
                     }
             }
         }
+        else
+            TimePassed.StopCounting();
     }
 
 }

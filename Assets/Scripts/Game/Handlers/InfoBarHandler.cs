@@ -18,7 +18,7 @@ public class InfoBarHandler : MonoBehaviour
             Timer timer = GameManager.Instance.TimePassed;
 
             _antCount.text =
-                player.UnitCount.ToString() +
+                player.UnitCount().ToString() +
                 "/" +
                 player.UnitLimit().ToString();
             _resources.text = player.Resources.ToString();

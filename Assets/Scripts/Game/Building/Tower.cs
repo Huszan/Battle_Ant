@@ -17,7 +17,9 @@ public class Tower : MonoBehaviour
     }
     private void Update()
     {
-        if (Timer.Counter > 60f / shotsPerMinute)
+        if (
+            Timer.Counter > 60f / shotsPerMinute && 
+            GameManager.Instance.GameState == GameState.PLAYING)
         {
             Shoot(RandomTarget());
             Timer.ResetCounter();

@@ -31,11 +31,11 @@ public class UnitSpawner : MonoBehaviour
 
     private void SpawnUnit()
     {
+        if (GameManager.Instance.GameState != GameState.PLAYING) return;
         var unit = UnitFactory.GetNewInstance();
+        unit.transform.parent = SpawningBuilding.transform;
         unit.gameObject.transform.position = transform.position;
         unit.SetOwner(SpawningBuilding.Owner);
         unit.SetJob(new WorkerJob(SpawningBuilding.FindClosestResources().transform.position, unit));
-        SpawningBuilding.Owner.UnitCreated();
     }
-    //SpawningBuilding.ClosestResource()
 }

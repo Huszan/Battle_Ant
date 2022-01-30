@@ -27,6 +27,8 @@ public class WorkerJob : JobBase
 
     public override void Perform()
     {
+        if (GameManager.Instance.GameState != GameState.PLAYING) return;
+
         Vector2 currentPosition = Unit.gameObject.transform.position;
         if (Stage == JobStage.COLLECTING_FOOD)
         {

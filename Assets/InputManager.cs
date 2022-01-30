@@ -11,18 +11,18 @@ public class InputManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public GameObject miniGameMenu;
+    public GameObject ingameMenu;
     public GameObject curtain;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.GameState == GameState.PLAYING)
-            ToggleMiniGameMenu();
+            ToggleIngameMenu();
     }
 
-    private void ToggleMiniGameMenu()
+    private void ToggleIngameMenu()
     {
-        miniGameMenu.SetActive(!miniGameMenu.activeSelf);
+        ingameMenu.SetActive(!ingameMenu.activeSelf);
         curtain.SetActive(!curtain.activeSelf);
     }
 

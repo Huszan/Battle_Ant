@@ -18,11 +18,7 @@ public class Unit : MonoBehaviour
         else
             Kill();
     }
-    public void Kill()
-    {
-        Owner.UnitDestroyed();
-        Destroy(transform.gameObject);
-    }
+    public void Kill() => Destroy(transform.gameObject);
     public void SetOwner(Player player) => Owner = player;
     public void SetJob(JobBase job) => Job = job;
 
