@@ -52,14 +52,85 @@ public class Tilemap : MonoBehaviour
         CreatedTiles[(int)MapSize.x-1, 0]
 };
 
+    private enum JumpDirection
+    {
+        SW,W,NW,NE,E,SE
+    }
     public List<GameObject> TilesInRange(Vector2 pos, int range)
     {
         var tiles = new List<GameObject>();
-        for (int i = (int)pos.x - range; i <= range + (int)pos.x; i++)
-            for (int j = (int)pos.y - range; j <= range + (int)pos.y; j++)
-                if (PositionExists(new Vector2(i,j)))
-                    tiles.Add(CreatedTiles[i, j]);
+        
+        tiles.Add(CreatedTiles[(int)pos.x, (int)pos.y]);
+        Vector2 pointer;
+        for (int r = 1; r <= range; r++)
+        {
+            pointer = pos + new Vector2(0, r);
+            JumpAndGrab(JumpDirection.SW, r);
+            JumpAndGrab(JumpDirection.W, r);
+            JumpAndGrab(JumpDirection.NW, r);
+            JumpAndGrab(JumpDirection.NE, r);
+            JumpAndGrab(JumpDirection.E, r);
+            JumpAndGrab(JumpDirection.SE, r);
+        }
+
         return tiles;
+
+        void JumpAndGrab(JumpDirection direction, int repeatCount)
+        {
+            for (int i = 0; i < repeatCount; i++)
+            {
+                switch (direction)
+                {
+                    case (JumpDirection.SW):
+                        {
+                            if (pointer.x % 2 == 0)
+                                pointer += new Vector2(-1, -1);
+                            else
+                                pointer += new Vector2(-1, 0);
+                            break;
+                        }
+                    case (JumpDirection.W):
+                        {
+                            pointer += new Vector2(0, -1);
+                            break;
+                        }
+                    case (JumpDirection.NW):
+                        {
+                            if (pointer.x % 2 == 0)
+                                pointer += new Vector2(1, -1);
+                            else
+                                pointer += new Vector2(1, 0);
+                            break;
+                        }
+                    case (JumpDirection.NE):
+                        {
+                            if (pointer.x % 2 == 0)
+                                pointer += new Vector2(1, 0);
+                            else
+                                pointer += new Vector2(1, 1);
+                            break;
+                        }
+                    case (JumpDirection.E):
+                        {
+                            pointer += new Vector2(0, 1);
+                            break;
+                        }
+                    case (JumpDirection.SE):
+                        {
+                            if (pointer.x % 2 == 0)
+                                pointer += new Vector2(-1, 0);
+                            else
+                                pointer += new Vector2(-1, 1);
+                            break;
+                        }
+                }
+                if (PositionExists(pointer))
+                {
+                    var tile = CreatedTiles[(int)pointer.x, (int)pointer.y];
+                    tiles.Add(tile);
+                }
+            }
+        }
     }
     public List<GameObject> GetTilesFromPositions(List<Vector2> positions)
     {
@@ -104,9 +175,9 @@ public class Tilemap : MonoBehaviour
         /* Create, rename, set parent and store tiles */
         CreatedTiles = new GameObject[(int)mapSize.x, (int)mapSize.y];
         Debug.Log($"{CreatedTiles.GetLength(0)},{CreatedTiles.GetLength(1)}");
-        for (int i = 0; i < mapSize.y; i++)
+        for (int i = 0; i < mapSize.x; i++)
         {
-            for (int j = 0; j < mapSize.x; j++)
+            for (int j = 0; j < mapSize.y; j++)
             {
                 GameObject tile = Instantiate(tileGrass);
                 tile.transform.rotation = Quaternion.identity;
@@ -122,7 +193,7 @@ public class Tilemap : MonoBehaviour
 
                 tile.name = new Vector2(i,j).ToString();
                 tile.transform.SetParent(transform);
-                CreatedTiles[j, i] = tile;
+                CreatedTiles[i, j] = tile;
             }
         }
         Debug.Log("Map was created");

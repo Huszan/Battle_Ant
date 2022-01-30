@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
@@ -41,7 +39,6 @@ public class BuildingManager : MonoBehaviour
             player.SubtractResources(buildingPref.cost);
             player.Buildings.Add(building);
             obj.transform.GetComponent<SpriteRenderer>().color = player.Color;
-            // Debug.Log($"{building} was created for {player.Color}, it's coordinates -> {building.Position}");
         }
     }
 
