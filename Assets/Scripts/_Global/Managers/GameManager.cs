@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public GameState GameState { get; private set; }
+    public GameState GameState { get; set; }
     public Difficulty Difficulty { get; private set; }
     public Timer TimePassed { get; private set; }
     public Player HumanPlayer { get; private set; }
@@ -194,37 +194,20 @@ public class GameManager : MonoBehaviour
             Destroy(building.gameObject);
         AiPlayers.Remove(player);
     }
-
-    private void Update()
+    public void CheckEndgameCoditions()
     {
-        if (GameState == GameState.PLAYING)
+        if (HumanPlayer.Defeated())
         {
-            if (HumanPlayer.Defeated())
-            {
-                GameState = GameState.FINISHED_LOST;
-                Curtain.SetActive(true);
-                GameLostScreen.SetActive(true);
-            }
-
-            if (AiPlayers.Count <= 0)
-            {
-                GameState = GameState.FINISHED_WON;
-                Curtain.SetActive(true);
-                GameWonScreen.SetActive(true);
-            }
-            else
-            {
-                Debug.Log($"There is {AiPlayers.Count} players");
-                foreach (Player player in AiPlayers.ToArray())
-                    if (player.Defeated())
-                    {
-                        Debug.Log($"{player} was defeated");
-                        ClearFromGame(player);
-                    }
-            }
+            GameState = GameState.FINISHED_LOST;
+            Curtain.SetActive(true);
+            GameLostScreen.SetActive(true);
         }
-        else
-            TimePassed.StopCounting();
+        if (AiPlayers.Count <= 0)
+        {
+            GameState = GameState.FINISHED_WON;
+            Curtain.SetActive(true);
+            GameWonScreen.SetActive(true);
+        }
     }
 
 }

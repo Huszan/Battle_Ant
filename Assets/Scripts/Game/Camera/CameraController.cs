@@ -70,7 +70,8 @@ public class CameraController : MonoBehaviour
     }
     private bool CanMove()
     {
-        if (GameManager.Instance.GameState == GameState.PLAYING)
+        if (GameManager.Instance.GameState == GameState.PLAYING ||
+            GameManager.Instance.GameState == GameState.PAUSED)
             return true;
         else
             return false;

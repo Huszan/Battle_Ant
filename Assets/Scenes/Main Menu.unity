@@ -4640,7 +4640,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 987851461}
   m_HandleRect: {fileID: 987851460}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -11067,7 +11067,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357501329}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -11596,7 +11596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -362.0006}
+  m_AnchoredPosition: {x: 420, y: -362}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479177947
@@ -13735,7 +13735,6 @@ GameObject:
   - component: {fileID: 1791326634}
   - component: {fileID: 1791326633}
   - component: {fileID: 1791326636}
-  - component: {fileID: 1791326632}
   - component: {fileID: 1791326631}
   - component: {fileID: 1791326630}
   - component: {fileID: 1791326637}
@@ -13770,19 +13769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf8faefb0e5a1044a01ab5d57ffbb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1791326632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791326629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c3733a58dba06d4caaf4fe8f26b7e07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: {x: -1, y: 1}
 --- !u!114 &1791326633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13845,7 +13831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538c468c6ef0d9a4cbf3361376f91df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameMenu: {fileID: 469253750}
+  ingameMenu: {fileID: 469253750}
   curtain: {fileID: 1599794766}
 --- !u!114 &1791326637
 MonoBehaviour:
@@ -15861,7 +15847,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017218452}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

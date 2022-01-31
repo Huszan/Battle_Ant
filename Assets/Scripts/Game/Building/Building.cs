@@ -37,8 +37,14 @@ public class Building : MonoBehaviour
     }
     private void Kill()
     {
-        Owner.Buildings.Remove(this);
-        Destroy(transform.gameObject);
+        if (!buildable)
+            GameManager.Instance.ClearFromGame(Owner);
+        else
+        {
+            Owner.Buildings.Remove(this);
+            Destroy(transform.gameObject);
+        }
+        GameManager.Instance.CheckEndgameCoditions();
     }
 
 }
