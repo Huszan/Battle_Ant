@@ -207,7 +207,9 @@ public class Tilemap : MonoBehaviour
         public void Gather()
         {
             FoodSources = FindFoodSources();
+            Debug.Log($"Ive found {FoodSources.Count} food sources");
             GoodGatheringHallSpots = FindGoodGatheringHallSpots();
+            Debug.Log($"Ive found {GoodGatheringHallSpots.Count} good gathering spots");
         }
 
         private List<Building> FindFoodSources()

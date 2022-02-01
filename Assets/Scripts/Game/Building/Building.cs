@@ -14,10 +14,14 @@ public class Building : MonoBehaviour
     public Vector2 Position { get; private set; }
     public void SetPosition(Vector2 pos) => Position = pos;
     public void SetOwner(Player player) => Owner = player;
-    public List<GameObject> TilesInRange() => Tilemap.Instance.TilesInRange(Position, range);
-    public GameObject FindClosestResources()
+    public List<GameObject> TilesInRange { get; private set; }
+    public void SetTilesInRange() => TilesInRange = Tilemap.Instance.TilesInRange(Position, range);
+    public GameObject ClosestResourceNode { get; private set; }
+    public void SetClosestResourceNode() => ClosestResourceNode = FindClosestResource();
+
+    private GameObject FindClosestResource()
     {
-        foreach (GameObject tile in TilesInRange())
+        foreach (GameObject tile in TilesInRange)
         {
             Building building = tile.GetComponentInChildren<Building>();
             if (

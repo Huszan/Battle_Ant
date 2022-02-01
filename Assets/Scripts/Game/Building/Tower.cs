@@ -28,7 +28,7 @@ public class Tower : MonoBehaviour
     private Building RandomTarget()
     {
         var possibleTargets = new List<Building>();
-        foreach (GameObject tile in BuildingShooting.TilesInRange())
+        foreach (GameObject tile in BuildingShooting.TilesInRange)
         {
             var building = tile.GetComponentInChildren<Building>();
             if (building != null && building.Owner != null && building.Owner != BuildingShooting.Owner)

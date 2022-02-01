@@ -48,7 +48,6 @@ public class PlayerAi
                 logic.FindSpotsToBuild();
                 if (logic.ConditionsMet())
                     logic.Build();
-                logic.YELLINFO();
             }
 
             yield return new WaitForSeconds(Delay);

@@ -10,6 +10,7 @@ public abstract class BuildBaseLogic
     public BuildBaseLogic(Player player)
     {
         Player = player;
+        SpotsToBuild = new List<GameObject>();
     }
 
     private List<bool> Conditions()

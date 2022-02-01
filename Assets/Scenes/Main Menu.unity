@@ -11609,7 +11609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -361.99997}
+  m_AnchoredPosition: {x: 420, y: -362.00003}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479177947
@@ -13826,9 +13826,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a268a54d92d7749b739f34cbde17eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Curtain: {fileID: 0}
-  GameWonScreen: {fileID: 0}
-  GameLostScreen: {fileID: 0}
+  Curtain: {fileID: 1599794766}
+  GameWonScreen: {fileID: 1357501329}
+  GameLostScreen: {fileID: 2017218452}
   foodPercentage: 0.061
   foodDistanceFromEdge: 4
 --- !u!4 &1791326635

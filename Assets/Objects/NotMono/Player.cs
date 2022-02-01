@@ -59,7 +59,7 @@ public class Player
         var tilesInRange = new List<GameObject>();
         foreach (Building building in Buildings)
             tilesInRange.AddRange(
-                building.TilesInRange());
+                building.TilesInRange);
         tilesInRange = tilesInRange.Distinct().ToList();
         return tilesInRange;
     }

@@ -34,6 +34,8 @@ public class BuildingManager : MonoBehaviour
 
         building.SetOwner(player);
         building.SetPosition(Tilemap.Instance.TileCoordinates(tileGO));
+        building.SetTilesInRange();
+        building.SetClosestResourceNode();
         if (player != null)
         {
             player.SubtractResources(buildingPref.cost);
