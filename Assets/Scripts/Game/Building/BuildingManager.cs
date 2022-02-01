@@ -44,23 +44,25 @@ public class BuildingManager : MonoBehaviour
 
     private bool BuildConditionsPassed(GameObject tileGO, Building buildingPref, Player player)
     {
+        bool poping = true;
+        if (player != GameManager.Instance.HumanPlayer) poping = false;
         if (tileGO.GetComponentInChildren<Building>() != null)
         {
-            PopupManager.Instance.Pop(
+            if (poping) PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,
                 "You can't place building inside another building");
             return false;
         }
         if (buildingPref.cost > player.Resources)
         {
-            PopupManager.Instance.Pop(
+            if (poping) PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,
                 "You can't have enough resources");
             return false;
         }
         if (!player.BuildRange().Contains(tileGO))
         {
-            PopupManager.Instance.Pop(
+            if (poping) PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,
                 "You can't place it here, expand your build range");
             return false;

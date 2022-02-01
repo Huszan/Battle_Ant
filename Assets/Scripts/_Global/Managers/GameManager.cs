@@ -55,19 +55,22 @@ public class GameManager : MonoBehaviour
         GameState = GameState.LOADING;
 
         Tilemap.Instance.GenerateTilemap(mapSize);
-        InitializePlayers(numberOfOpponents, difficulty);
+        Difficulty = difficulty;
+        InitializePlayers(numberOfOpponents);
         InitializePlayersAssets();
         SpawnFoodSources();
 
         GameState = GameState.PLAYING;
 
+        AiManager.Instance.enabled = true;
         TimePassed.StartCounting();
     }
 
     public void FinishGame(int index)
     {
-        StartCoroutine(FinishGameAsync(index));
         GameState = GameState.UNDEFINED;
+        AiManager.Instance.enabled = false;
+        StartCoroutine(FinishGameAsync(index));
     }
 
     private IEnumerator FinishGameAsync(int index)
@@ -94,15 +97,14 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(previousScene.buildIndex);
     }
 
-    private void InitializePlayers(int enemiesCount, Difficulty difficulty)
+    private void InitializePlayers(int enemiesCount)
     {
-        AiPlayers = new List<Player>();
-        InitializeLocalPlayer(difficulty);
+        InitializeLocalPlayer();
         InitializeAiPlayers(enemiesCount);
     }
-    private void InitializeLocalPlayer(Difficulty difficulty)
+    private void InitializeLocalPlayer()
     {
-        switch (difficulty)
+        switch (Difficulty)
         {
             case (Difficulty.EASY):
                 HumanPlayer = new Player(300f);
@@ -120,6 +122,7 @@ public class GameManager : MonoBehaviour
     }
     private void InitializeAiPlayers(int enemiesCount)
     {
+        AiPlayers = new List<Player>();
         for (int i = 0; i < enemiesCount; i++)
             AiPlayers.Add(new Player(200f));
     }

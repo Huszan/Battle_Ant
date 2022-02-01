@@ -7,6 +7,7 @@ public class Player
     public Color32 Color { get; private set; }
     public float Resources { get; private set; }
     public List<Building> Buildings { get; private set; }
+    public PlayerAi PlayerAi { get; private set; }
     public int UnitCount()
     {
         int count = 0;
@@ -25,6 +26,7 @@ public class Player
         }
         return true;
     }
+    public void AddAi() => PlayerAi = new PlayerAi(this);
 
     public Player(float startingResources)
     {
