@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour
         float angle = Mathf.Atan2(movDir.y, movDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle + 90f, Vector3.forward);
     }
-            
+
 
     void Update()
     {

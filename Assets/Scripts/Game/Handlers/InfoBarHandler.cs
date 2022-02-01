@@ -11,7 +11,7 @@ public class InfoBarHandler : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.GameState != GameState.LOADING && 
+        if (GameManager.Instance.GameState != GameState.LOADING &&
             GameManager.Instance.GameState != GameState.UNDEFINED)
         {
             Player player = GameManager.Instance.HumanPlayer;

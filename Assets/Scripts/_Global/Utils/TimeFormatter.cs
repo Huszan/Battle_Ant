@@ -10,10 +10,10 @@ public static class TimeFormatter
 
     public static string GetFullTime(float time)
     {
-        return 
+        return
             $"{GetTimeFormatedTo(time, TimeFormat.HOUR)}:" +
-            $"{GetTimeFormatedTo(time ,TimeFormat.MINUTE)}:" +
-            $"{GetTimeFormatedTo(time ,TimeFormat.SECOND)}";
+            $"{GetTimeFormatedTo(time, TimeFormat.MINUTE)}:" +
+            $"{GetTimeFormatedTo(time, TimeFormat.SECOND)}";
     }
     public static string GetTimeFormatedTo(float time, TimeFormat tf)
     {

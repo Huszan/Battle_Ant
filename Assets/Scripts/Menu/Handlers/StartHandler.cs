@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections;
 using TMPro;
-using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartHandler : MonoBehaviour
 {
@@ -16,11 +16,11 @@ public class StartHandler : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown dropdownDifficulty;
 
-    private Vector2 GetMapSize() => 
+    private Vector2 GetMapSize() =>
         new Vector2(sliderX.value, sliderY.value);
-    private int GetNumberOfOponents() => 
+    private int GetNumberOfOponents() =>
         (int)sliderEnemies.value;
-    private Difficulty GetDifficulty() => 
+    private Difficulty GetDifficulty() =>
         (Difficulty)dropdownDifficulty.value;
 
     public void StartNewGame(int index)

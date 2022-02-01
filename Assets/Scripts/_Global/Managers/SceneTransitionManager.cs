@@ -17,9 +17,9 @@ public class SceneTransitionManager
         }
         operation.allowSceneActivation = true;
 
-        
+
         if (!(objectsToMove is null))
-            foreach (GameObject go in objectsToMove) 
+            foreach (GameObject go in objectsToMove)
                 SceneManager.MoveGameObjectToScene(GameObject.Find(go.name), sceneToLoad);
 
         while (!operation.isDone)

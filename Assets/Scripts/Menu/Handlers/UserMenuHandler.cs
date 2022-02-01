@@ -1,7 +1,7 @@
 ﻿
-using UnityEngine;
-using TMPro;
 using Mono.Data.Sqlite;
+using TMPro;
+using UnityEngine;
 
 public class UserMenuHandler : MonoBehaviour
 {
@@ -50,14 +50,14 @@ public class UserMenuHandler : MonoBehaviour
         if (usernameInput.text == "")
         {
             PopupManager.Instance.Pop(
-                PopupManager.PopType.warning, 
+                PopupManager.PopType.warning,
                 "You can't create account without a name");
             return;
         }
         if (IsDuplicate(usernameInput.text))
         {
             PopupManager.Instance.Pop(
-                PopupManager.PopType.warning, 
+                PopupManager.PopType.warning,
                 "Account with this name is already created");
             return;
         }
@@ -71,7 +71,7 @@ public class UserMenuHandler : MonoBehaviour
             {
                 Debug.LogWarning(e.Message);
                 PopupManager.Instance.Pop(
-                    PopupManager.PopType.warning, 
+                    PopupManager.PopType.warning,
                     "Sorry, omething went wrong. Try again.");
             }
             usernameInput.text = "";
@@ -82,7 +82,7 @@ public class UserMenuHandler : MonoBehaviour
     {
         DatabaseManager.DeleteUser(user.name);
         PopupManager.Instance.Pop(
-            PopupManager.PopType.success, 
+            PopupManager.PopType.success,
             "Account with name " + user.name + " was successfully deleted");
 
         ShowUsers();
@@ -92,7 +92,7 @@ public class UserMenuHandler : MonoBehaviour
         CurrentUser.user = user;
         CurrentUser.ExecuteSettings();
         PopupManager.Instance.Pop(
-            PopupManager.PopType.success, 
+            PopupManager.PopType.success,
             "Hello " + user.name + "!");
 
         ShowUsers();

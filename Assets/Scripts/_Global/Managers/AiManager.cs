@@ -14,12 +14,10 @@ public class AiManager : MonoBehaviour
     {
         GameManager.Instance.HumanPlayer.AddAi();
         StartCoroutine(GameManager.Instance.HumanPlayer.PlayerAi.Process());
-        /*
         foreach (Player player in GameManager.Instance.AiPlayers)
         {
             player.AddAi();
-            StartCoroutine(player.PlayerAi.StartUpdating());
+            StartCoroutine(player.PlayerAi.Process());
         }
-        */
     }
 }

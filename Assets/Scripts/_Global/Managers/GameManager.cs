@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         InitializePlayers(numberOfOpponents);
         InitializePlayersAssets();
         SpawnFoodSources();
+        Tilemap.Instance.GetInfo.Gather();
 
         GameState = GameState.PLAYING;
 

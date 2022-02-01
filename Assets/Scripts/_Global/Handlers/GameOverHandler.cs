@@ -15,7 +15,9 @@ public class GameOverHandler : MonoBehaviour
         else
             return null;
     }
-    private Highscore ScoreToSave { get; set;
+    private Highscore ScoreToSave
+    {
+        get; set;
     }
     private void OnEnable()
     {

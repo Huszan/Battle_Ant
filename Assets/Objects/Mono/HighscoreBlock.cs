@@ -21,6 +21,6 @@ public class HighscoreBlock : MonoBehaviour
             usernameText.text = username;
         else usernameText.text = "Ant ghost";
         scoreText.text = Hs.Score.ToString();
-        indexText.text = Index.ToString()+".";
+        indexText.text = Index.ToString() + ".";
     }
 }

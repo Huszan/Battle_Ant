@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
             pos.x -= currentSpeed * Time.deltaTime;
 
-        Vector3 mouseMovement = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0) * (mainCamera.orthographicSize/26);
+        Vector3 mouseMovement = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0) * (mainCamera.orthographicSize / 26);
         if (Input.GetKey(KeyCode.Mouse2))
             pos -= mouseMovement;
 
@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
 
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, scrollLimit.x, scrollLimit.y);
 
-        Vector2 panLimit = 
+        Vector2 panLimit =
             Tilemap.Instance.TransformSize;
         pos.x = Mathf.Clamp(pos.x, 0, panLimit.x);
         pos.y = Mathf.Clamp(pos.y, 0, panLimit.y * 0.75f);

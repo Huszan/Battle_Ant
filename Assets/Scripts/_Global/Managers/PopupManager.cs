@@ -32,7 +32,7 @@ public class PopupManager : MonoBehaviour
     public void Pop(PopType type, string message)
     {
         GameObject pop = Instantiate(popupBoxPrefab, popupFrame.transform);
-        switch(type)
+        switch (type)
         {
             case PopType.success:
                 pop.GetComponent<Popup>().Setup(successData, message);

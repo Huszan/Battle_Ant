@@ -18,7 +18,7 @@ public class HighscoresHandler : MonoBehaviour
             block.Index = index++;
             block.Hs = hs;
 
-            ((RectTransform)view.transform).sizeDelta += new Vector2(0, 
+            ((RectTransform)view.transform).sizeDelta += new Vector2(0,
                 ((RectTransform)block.transform).sizeDelta.y);
         }
 

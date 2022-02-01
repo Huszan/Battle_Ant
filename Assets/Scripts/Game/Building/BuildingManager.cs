@@ -29,7 +29,7 @@ public class BuildingManager : MonoBehaviour
             tileGO.transform.position,
             new Quaternion(0, 0, 0, 0),
             tileGO.transform);
-        var building = 
+        var building =
             obj.GetComponent<Building>();
 
         building.SetOwner(player);

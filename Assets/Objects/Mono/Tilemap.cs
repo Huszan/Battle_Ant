@@ -4,6 +4,7 @@ using UnityEngine;
 public class Tilemap : MonoBehaviour
 {
     public static Tilemap Instance { get; private set; }
+    public Info GetInfo = new Info();
     [Header("Import")]
     [SerializeField]
     private GameObject tileGrass;
@@ -20,7 +21,7 @@ public class Tilemap : MonoBehaviour
     }
 
     public Vector2 MapSize => new Vector2(
-        CreatedTiles.GetLength(0), 
+        CreatedTiles.GetLength(0),
         CreatedTiles.GetLength(1));
     public Vector2 TransformSize => new Vector2(
             MapSize.x * TileSize.x,
@@ -31,8 +32,8 @@ public class Tilemap : MonoBehaviour
         {
             for (int j = 0; j < CreatedTiles.GetLength(1); j++)
             {
-                if (CreatedTiles[i,j] == searchedTile)
-                    return new Vector2(i,j);
+                if (CreatedTiles[i, j] == searchedTile)
+                    return new Vector2(i, j);
             }
         }
         return new Vector2();
@@ -54,13 +55,12 @@ public class Tilemap : MonoBehaviour
 
     private enum JumpDirection
     {
-        SW,W,NW,NE,E,SE
+        SW, W, NW, NE, E, SE
     }
     public List<GameObject> TilesInRange(Vector2 pos, int range)
     {
         var tiles = new List<GameObject>();
-        
-        tiles.Add(CreatedTiles[(int)pos.x, (int)pos.y]);
+
         Vector2 pointer;
         for (int r = 1; r <= range; r++)
         {
@@ -148,16 +148,16 @@ public class Tilemap : MonoBehaviour
     private bool MapIsGenerated() => CreatedTiles != null;
     public void SwitchOutline()
     {
-        if (!MapIsGenerated()) 
+        if (!MapIsGenerated())
         {
             Debug.LogError("Map is not generated!");
-            return; 
+            return;
         }
-        
+
 
         foreach (GameObject tile in CreatedTiles)
         {
-            if(tile.transform.childCount > 0)
+            if (tile.transform.childCount > 0)
             {
                 GameObject outline = tile.transform.Find("Outline").gameObject;
                 if (outline.activeSelf == false) outline.SetActive(true);
@@ -185,13 +185,13 @@ public class Tilemap : MonoBehaviour
                 if (i % 2 == 0)
                     tile.transform.position = new Vector3(
                         (float)(j * (TileSize.x)),
-                        (float)(i * (TileSize.y * 0.75 )), 0);
+                        (float)(i * (TileSize.y * 0.75)), 0);
                 if (i % 2 == 1)
                     tile.transform.position = new Vector3(
                         (float)(j * (TileSize.x) + (TileSize.x / 2)),
                         (float)(i * (TileSize.y * 0.75)), 0);
 
-                tile.name = new Vector2(i,j).ToString();
+                tile.name = new Vector2(i, j).ToString();
                 tile.transform.SetParent(transform);
                 CreatedTiles[i, j] = tile;
             }
@@ -199,4 +199,36 @@ public class Tilemap : MonoBehaviour
         Debug.Log("Map was created");
     }
 
+    public class Info
+    {
+        public List<Building> FoodSources { get; private set; }
+        public List<GameObject> GoodGatheringHallSpots { get; private set; }
+
+        public void Gather()
+        {
+            FoodSources = FindFoodSources();
+            GoodGatheringHallSpots = FindGoodGatheringHallSpots();
+        }
+
+        private List<Building> FindFoodSources()
+        {
+            var foodSources = new List<Building>();
+            foreach (GameObject go in Instance.CreatedTiles)
+            {
+                Building b = go.GetComponentInChildren<Building>();
+                if (b != null && b._name == BuildingManager.Instance.foodSource.GetComponent<Building>()._name)
+                    foodSources.Add(b);
+            }
+            return foodSources;
+        }
+        private List<GameObject> FindGoodGatheringHallSpots()
+        {
+            var list = new List<GameObject>();
+
+            foreach (Building b in FoodSources)
+                list.AddRange(Instance.TilesInRange(b.Position, 1));
+
+            return list;
+        }
+    }
 }

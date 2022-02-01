@@ -21,7 +21,7 @@ public class Building : MonoBehaviour
         {
             Building building = tile.GetComponentInChildren<Building>();
             if (
-                building != null && 
+                building != null &&
                 building._name.Equals(BuildingManager.Instance.foodSource.GetComponent<Building>()._name))
                 return tile;
         }

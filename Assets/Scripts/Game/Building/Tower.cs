@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
@@ -18,12 +17,12 @@ public class Tower : MonoBehaviour
     private void Update()
     {
         if (
-            Timer.Counter > 60f / shotsPerMinute && 
+            Timer.Counter > 60f / shotsPerMinute &&
             GameManager.Instance.GameState == GameState.PLAYING)
         {
             Shoot(RandomTarget());
             Timer.ResetCounter();
-        }   
+        }
     }
 
     private Building RandomTarget()

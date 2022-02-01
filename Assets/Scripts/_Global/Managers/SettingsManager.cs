@@ -21,7 +21,7 @@ public class SettingsManager : MonoBehaviour
         setting.Log();
         Debug.Log(Screen.currentResolution);
         PopupManager.Instance.Pop(
-            PopupManager.PopType.success, 
+            PopupManager.PopType.success,
             "Settings changed");
     }
     private void UpdateSettings()

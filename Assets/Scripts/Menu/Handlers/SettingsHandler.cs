@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class SettingsHandler : MonoBehaviour
 {
@@ -71,7 +71,7 @@ public class SettingsHandler : MonoBehaviour
         }
         toggleFullscren.isOn = Screen.fullScreen;
     }
- 
+
 
     private void GetSupportedResolutions()
     {

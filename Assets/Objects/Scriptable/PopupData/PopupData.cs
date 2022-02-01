@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(
-    fileName = "Popup", 
-    menuName = "ScriptableObjects/Popup", 
+    fileName = "Popup",
+    menuName = "ScriptableObjects/Popup",
     order = 1)]
 
 public class PopupData : ScriptableObject

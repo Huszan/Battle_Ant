@@ -1,9 +1,9 @@
 ﻿
-using System;
-using System.Data;
-using System.Collections.Generic;
-using UnityEngine;
 using Mono.Data.Sqlite;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using UnityEngine;
 
 public static class DatabaseManager
 {
@@ -19,11 +19,11 @@ public static class DatabaseManager
 
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = 
+                command.CommandText =
                     "SELECT * FROM User " +
                     "INNER JOIN Setting ON User.setting_id = Setting.id;";
 
-                using(IDataReader reader = command.ExecuteReader())
+                using (IDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -100,11 +100,11 @@ public static class DatabaseManager
         {
             Debug.LogWarning("User with this username already exists");
             return;
-        }  
+        }
         using (var connection = new SqliteConnection(dbName))
         {
             connection.Open();
-            
+
             using (var command = connection.CreateCommand())
             {
                 command.CommandText =
@@ -301,7 +301,7 @@ public static class DatabaseManager
 
                 using (IDataReader reader = command.ExecuteReader())
                 {
-                    
+
                     while (reader.Read())
                     {
                         list.Add(

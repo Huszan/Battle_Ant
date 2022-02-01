@@ -37,7 +37,7 @@ public class BuildMenu : MonoBehaviour
     }
     public void NextBuilding()
     {
-        if (CurrentBuldingIndex == BuildableBuildings.Count-1)
+        if (CurrentBuldingIndex == BuildableBuildings.Count - 1)
             CurrentBuldingIndex = 0;
         else
             CurrentBuldingIndex++;
@@ -45,7 +45,7 @@ public class BuildMenu : MonoBehaviour
     public void PreviousBuilding()
     {
         if (CurrentBuldingIndex == 0)
-            CurrentBuldingIndex = BuildableBuildings.Count-1;
+            CurrentBuldingIndex = BuildableBuildings.Count - 1;
         else
             CurrentBuldingIndex--;
     }

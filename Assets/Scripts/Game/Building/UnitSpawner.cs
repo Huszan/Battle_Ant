@@ -2,7 +2,8 @@
 
 public class UnitSpawner : MonoBehaviour
 {
-    void Awake() {
+    void Awake()
+    {
         SpawningBuilding = gameObject.GetComponent<Building>();
         if (SpawningBuilding == null)
             Debug.LogError($"{name} need a Building class to work");
@@ -20,8 +21,8 @@ public class UnitSpawner : MonoBehaviour
     private void Update()
     {
         if (
-            timer.ReachedTreshold(60 / spawnRatePerMinute) && 
-            !SpawningBuilding.Owner.UnitLimitReached() && 
+            timer.ReachedTreshold(60 / spawnRatePerMinute) &&
+            !SpawningBuilding.Owner.UnitLimitReached() &&
             SpawningBuilding.FindClosestResources() != null)
         {
             SpawnUnit();

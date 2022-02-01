@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerAi
@@ -41,9 +40,10 @@ public class PlayerAi
 
     public IEnumerator Process()
     {
-        while (AiManager.Instance.enabled)
+        while (AiManager.Instance.enabled &&
+            GameManager.Instance.GameState == GameState.PLAYING)
         {
-            foreach(BuildBaseLogic logic in BuildingLogics)
+            foreach (BuildBaseLogic logic in BuildingLogics)
             {
                 logic.FindSpotsToBuild();
                 if (logic.ConditionsMet())

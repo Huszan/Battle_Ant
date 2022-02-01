@@ -45,8 +45,8 @@ public class Player
         int score = 0;
         foreach (Building building in Buildings)
             score += (int)building.cost;
-        score += (int)Resources/5;
-        return score * ((int)GameManager.Instance.Difficulty+1);
+        score += (int)Resources / 5;
+        return score * ((int)GameManager.Instance.Difficulty + 1);
     }
     public void AddResources(float amount) => Resources += amount;
     public void SubtractResources(float amount) => Resources -= amount;
