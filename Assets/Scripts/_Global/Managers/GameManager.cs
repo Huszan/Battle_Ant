@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.UNDEFINED;
         AiManager.Instance.enabled = false;
+        TimePassed.StopCounting();
+        TimePassed.ResetCounter();
         StartCoroutine(FinishGameAsync(index));
     }
 
