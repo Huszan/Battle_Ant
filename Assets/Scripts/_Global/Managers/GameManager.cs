@@ -56,10 +56,10 @@ public class GameManager : MonoBehaviour
 
         Tilemap.Instance.GenerateTilemap(mapSize);
         SpawnFoodSources();
+        Tilemap.Instance.GetInfo.Gather();
         Difficulty = difficulty;
         InitializePlayers(numberOfOpponents);
         InitializePlayersAssets();
-        Tilemap.Instance.GetInfo.Gather();
 
         GameState = GameState.PLAYING;
 
