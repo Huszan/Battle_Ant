@@ -40,15 +40,16 @@ public class PlayerAi
 
     public IEnumerator Process()
     {
-        while (AiManager.Instance.enabled &&
-            GameManager.Instance.GameState == GameState.PLAYING)
+        while (AiManager.Instance.enabled)
         {
-            foreach (BuildBaseLogic logic in BuildingLogics)
-            {
-                logic.FindSpotsToBuild();
-                if (logic.ConditionsMet())
-                    logic.Build();
-            }
+            if (GameManager.Instance.GameState == GameState.PLAYING)
+                foreach (BuildBaseLogic logic in BuildingLogics)
+                {
+                    logic.FindSpotsToBuild();
+                    if (logic.ConditionsMet())
+                        logic.Build();
+                    logic.YELLINFO();
+                }
 
             yield return new WaitForSeconds(Delay);
         }

@@ -12,8 +12,8 @@ public class AiManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        GameManager.Instance.HumanPlayer.AddAi();
-        StartCoroutine(GameManager.Instance.HumanPlayer.PlayerAi.Process());
+        //GameManager.Instance.HumanPlayer.AddAi();
+        //StartCoroutine(GameManager.Instance.HumanPlayer.PlayerAi.Process());
         foreach (Player player in GameManager.Instance.AiPlayers)
         {
             player.AddAi();
