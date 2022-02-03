@@ -40,7 +40,7 @@ public class BuildingManager : MonoBehaviour
         {
             player.SubtractResources(buildingPref.cost);
             player.Buildings.Add(building);
-            obj.transform.GetComponent<SpriteRenderer>().color = player.Color;
+            building.flagCanvas.color = player.Color;
         }
     }
 

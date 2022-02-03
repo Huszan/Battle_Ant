@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    public SpriteRenderer flagCanvas;
+
     public string _name;
     public string _description;
     public float hp;
@@ -31,7 +33,6 @@ public class Building : MonoBehaviour
         }
         return null;
     }
-
     public void Damage(float amount)
     {
         if (amount < hp)
