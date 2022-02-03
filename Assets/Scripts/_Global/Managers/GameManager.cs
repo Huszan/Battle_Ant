@@ -71,8 +71,6 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.UNDEFINED;
         AiManager.Instance.enabled = false;
-        TimePassed.StopCounting();
-        TimePassed.ResetCounter();
         StartCoroutine(FinishGameAsync(index));
     }
 
@@ -207,12 +205,16 @@ public class GameManager : MonoBehaviour
             GameState = GameState.FINISHED_LOST;
             Curtain.SetActive(true);
             GameLostScreen.SetActive(true);
+            TimePassed.StopCounting();
+            TimePassed.ResetCounter();
         }
-        if (AiPlayers.Count <= 0)
+        else if (AiPlayers.Count <= 0)
         {
             GameState = GameState.FINISHED_WON;
             Curtain.SetActive(true);
             GameWonScreen.SetActive(true);
+            TimePassed.StopCounting();
+            TimePassed.ResetCounter();
         }
     }
 

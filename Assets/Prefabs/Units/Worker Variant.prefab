@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 8861027150600253015, guid: 9ceb6d53a416d614e876da157a558a6a,
         type: 3}
       propertyPath: carryAmount
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8861027150600253015, guid: 9ceb6d53a416d614e876da157a558a6a,
         type: 3}
