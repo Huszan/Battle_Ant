@@ -4,6 +4,10 @@ using UnityEngine;
 public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance { get; private set; }
+    [Header("Audio sources")]
+    public SfxHandler sfxHandler;
+    public MusicHandler musicHandler;
+
     private Setting setting;
 
     private void Awake()
@@ -24,9 +28,10 @@ public class SettingsManager : MonoBehaviour
             PopupManager.PopType.success,
             "Settings changed");
     }
-    private void UpdateSettings()
+    public void UpdateSettings()
     {
-        // THERE WILL BE CODE FOR SOUND UPDATE
+        sfxHandler.source.volume = (setting.volume.sfx / 100) * (setting.volume.master / 100);
+        musicHandler.source.volume = (setting.volume.music / 100) * (setting.volume.master / 100);
         Screen.SetResolution(
             setting.screenWidth,
             setting.screenHeight,

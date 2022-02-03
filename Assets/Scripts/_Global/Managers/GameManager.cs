@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
     public void FinishGame(int index)
     {
         GameState = GameState.UNDEFINED;
+        TimePassed.ResetCounter();
+        TimePassed.StopCounting();
+        Debug.Log($"Game is over, time after finish -> {TimePassed.Counter}");
         AiManager.Instance.enabled = false;
         StartCoroutine(FinishGameAsync(index));
     }

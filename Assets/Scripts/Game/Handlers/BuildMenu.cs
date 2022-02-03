@@ -29,12 +29,7 @@ public class BuildMenu : MonoBehaviour
         CurrentBuldingIndex = 0;
     }
 
-    public void Activate()
-    {
-        if (Active) GameManager.Instance.GameState = GameState.PLAYING;
-        else GameManager.Instance.GameState = GameState.PAUSED;
-        Active = !Active;
-    }
+    public void Activate() => Active = !Active;
     public void NextBuilding()
     {
         if (CurrentBuldingIndex == BuildableBuildings.Count - 1)
@@ -54,7 +49,6 @@ public class BuildMenu : MonoBehaviour
     {
         if (Active)
         {
-            GameManager.Instance.TimePassed.StopCounting();
             PlayerServiced = GameManager.Instance.HumanPlayer;
             GameObject _building = BuildableBuildings[CurrentBuldingIndex];
             Display(_building);
@@ -70,7 +64,6 @@ public class BuildMenu : MonoBehaviour
                         PlayerServiced);
             }
         }
-        else GameManager.Instance.TimePassed.StartCounting();
     }
     private void Display(GameObject buildingToDisplay)
     {

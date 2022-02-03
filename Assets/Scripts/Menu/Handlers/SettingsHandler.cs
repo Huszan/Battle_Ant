@@ -55,7 +55,10 @@ public class SettingsHandler : MonoBehaviour
     }
     private void UpdateSoundSettings()
     {
-        // TODO
+        var volume = CurrentUser.user.setting.volume;
+        sliderVolumeMaster.value = volume.master;
+        sliderVolumeSfx.value = volume.sfx;
+        sliderVolumeMusic.value = volume.music;
     }
     private void UpdateScreenSettings()
     {
