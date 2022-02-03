@@ -174,7 +174,6 @@ public class Tilemap : MonoBehaviour
         }
         /* Create, rename, set parent and store tiles */
         CreatedTiles = new GameObject[(int)mapSize.x, (int)mapSize.y];
-        Debug.Log($"{CreatedTiles.GetLength(0)},{CreatedTiles.GetLength(1)}");
         for (int i = 0; i < mapSize.x; i++)
         {
             for (int j = 0; j < mapSize.y; j++)

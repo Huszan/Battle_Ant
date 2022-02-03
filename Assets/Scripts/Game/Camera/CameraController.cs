@@ -63,8 +63,8 @@ public class CameraController : MonoBehaviour
 
         Vector2 panLimit =
             Tilemap.Instance.TransformSize;
-        pos.x = Mathf.Clamp(pos.x, 0, panLimit.x);
-        pos.y = Mathf.Clamp(pos.y, 0, panLimit.y * 0.75f);
+        pos.y = Mathf.Clamp(pos.y, 0, panLimit.x * 0.75f);
+        pos.x = Mathf.Clamp(pos.x, 0, panLimit.y);
 
         transform.position = pos;
     }
