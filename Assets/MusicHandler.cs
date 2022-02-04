@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicHandler : SoundHandler
@@ -10,11 +9,14 @@ public class MusicHandler : SoundHandler
     }
     public IEnumerator LoopAllTracks()
     {
-        int currentIndex = 0;
+        int currentIndex = LibrarySize();
         while (true)
         {
             if (currentIndex >= LibrarySize())
+            {
                 currentIndex = 0;
+                ShuffleLibrary();
+            }
             else if (!source.isPlaying)
                 PlaySound(currentIndex++);
             yield return new WaitForSeconds(1);

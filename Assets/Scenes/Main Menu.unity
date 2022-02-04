@@ -1619,8 +1619,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 195576341}
   audioLibrary:
+  - {fileID: 8300000, guid: a8c658d6a6d790c45825b8a417ca9e38, type: 3}
+  - {fileID: 8300000, guid: 02cf66dc38a77ad4da3f3bbb1e0be1fc, type: 3}
+  - {fileID: 8300000, guid: bd6bea6ad64b3824ca81066d6b3afb05, type: 3}
   - {fileID: 8300000, guid: 52102682295547d439e8043124bbefe4, type: 3}
   - {fileID: 8300000, guid: e2d25a2eb151d1f43846f95429c0976f, type: 3}
+  - {fileID: 8300000, guid: da8550feda591ca48933839060c80434, type: 3}
+  - {fileID: 8300000, guid: a50995dfd9dbdb04fa5c34e6d2b0dcf9, type: 3}
+  - {fileID: 8300000, guid: 23ddd705be9021041a0592ceac028398, type: 3}
 --- !u!114 &198436963 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8322164317698989420, guid: 4ac4434cd746eba41a12b39f2b7b3c87,
@@ -4769,7 +4775,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 987851461}
   m_HandleRect: {fileID: 987851460}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -11913,7 +11919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -240.49821}
+  m_AnchoredPosition: {x: 420, y: -231.47174}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479177947
