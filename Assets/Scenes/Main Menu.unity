@@ -1619,8 +1619,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 195576341}
   audioLibrary:
-  - {fileID: 8300000, guid: fb277a1e47aa236469f8367d008cdb63, type: 3}
-  - {fileID: 8300000, guid: 1a38a6cf943af094ead8eeb3b8c47d0d, type: 3}
+  - {fileID: 8300000, guid: 52102682295547d439e8043124bbefe4, type: 3}
+  - {fileID: 8300000, guid: e2d25a2eb151d1f43846f95429c0976f, type: 3}
 --- !u!114 &198436963 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8322164317698989420, guid: 4ac4434cd746eba41a12b39f2b7b3c87,
@@ -11913,7 +11913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 420, y: -240.49832}
+  m_AnchoredPosition: {x: 420, y: -240.49821}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1479177947
