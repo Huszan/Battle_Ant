@@ -10,13 +10,12 @@ public abstract class BuildBaseLogic
     public BuildBaseLogic(Player player)
     {
         Player = player;
-        SpotsToBuild = new List<GameObject>();
     }
 
     private List<bool> Conditions()
     {
         var conditions = new List<bool>();
-        conditions.Add(SpotsToBuild.Count > 0);
+        conditions.Add(SpotToBuild != null);
         conditions.Add(Building.cost < Player.Resources);
         conditions.Add(Player.UnitCount() + (int)Building.cost / 10 * 2 < Player.UnitLimit());
         return conditions;
@@ -29,19 +28,14 @@ public abstract class BuildBaseLogic
     }
     public bool ConditionsMet() => Conditions().All(c => c == true) && AdditionalConditions().All(c => c == true);
 
-    public List<GameObject> SpotsToBuild { get; set; }
-    public abstract void FindSpotsToBuild();
+    public GameObject SpotToBuild { get; set; }
+    public abstract void FindSpotToBuild();
     public void Build()
     {
         BuildingManager.Instance.PlaceBuilding(
-            SpotsToBuild[0],
+            SpotToBuild,
             BuildingPrefab,
             Player);
-    }
-    public void YELLINFO()
-    {
-        Debug.Log($"I am an ai. My master is {Player} {Player.Color} " +
-            $"and i have {SpotsToBuild.Count} spots to build " +
-            $"additionaly i can tell you that my owner has {Player.BuildRange().Count} building range overall!");
+        SpotToBuild = null;
     }
 }

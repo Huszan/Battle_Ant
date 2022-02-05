@@ -12,12 +12,20 @@ public class AiManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        //GameManager.Instance.HumanPlayer.AddAi();
-        //StartCoroutine(GameManager.Instance.HumanPlayer.PlayerAi.Process());
+        //AddAiToHumanPlayer();
+        AddAiToComputerPlayers();
+    }
+    private void AddAiToHumanPlayer()
+    {
+        GameManager.Instance.HumanPlayer.AddAi();
+        StartCoroutine(GameManager.Instance.HumanPlayer.PlayerAi.Process());
+    }
+    private void AddAiToComputerPlayers()
+    {
         foreach (Player player in GameManager.Instance.AiPlayers)
-        {
-            player.AddAi();
-            StartCoroutine(player.PlayerAi.Process());
-        }
+            {
+                player.AddAi();
+                StartCoroutine(player.PlayerAi.Process());
+            }
     }
 }

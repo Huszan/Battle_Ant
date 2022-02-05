@@ -197,13 +197,13 @@ public class GameManager : MonoBehaviour
 
     public void ClearFromGame(Player player)
     {
-        foreach (Building building in player.Buildings)
+        foreach (Building building in player.Segregator.Buildings)
             Destroy(building.gameObject);
         AiPlayers.Remove(player);
     }
     public void CheckEndgameCoditions()
     {
-        if (HumanPlayer.Defeated())
+        if (HumanPlayer.IsDefeated())
         {
             GameState = GameState.FINISHED_LOST;
             Curtain.SetActive(true);

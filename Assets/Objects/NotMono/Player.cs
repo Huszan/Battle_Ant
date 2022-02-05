@@ -6,20 +6,20 @@ public class Player
 {
     public Color32 Color { get; private set; }
     public float Resources { get; private set; }
-    public List<Building> Buildings { get; private set; }
+    public BuildingSegregator Segregator { get; private set; }
     public PlayerAi PlayerAi { get; private set; }
     public int UnitCount()
     {
         int count = 0;
-        foreach (Building building in Buildings)
+        foreach (Building building in Segregator.Buildings)
             foreach (Transform child in building.gameObject.transform)
-                if (child.tag.Equals("Unit")) count++;
+                if (child.CompareTag("Unit")) count++;
         return count;
     }
-    public bool Defeated()
+    public bool IsDefeated()
     {
-        if (Buildings.Count <= 0) return true;
-        foreach (Building building in Buildings)
+        if (Segregator.Buildings.Count <= 0) return true;
+        foreach (Building building in Segregator.Buildings)
         {
             if (building.buildable == false)
                 return false;
@@ -37,13 +37,13 @@ public class Player
             255
             );
         Resources = startingResources;
-        Buildings = new List<Building>();
+        Segregator = new BuildingSegregator();
     }
 
     public int Score()
     {
         int score = 0;
-        foreach (Building building in Buildings)
+        foreach (Building building in Segregator.Buildings)
             score += (int)building.cost;
         score += (int)Resources / 5;
         return score * ((int)GameManager.Instance.Difficulty + 1);
@@ -53,15 +53,5 @@ public class Player
 
     public int UnitLimit() => (int)(Resources / 10 + 5);
     public bool UnitLimitReached() => UnitCount() >= UnitLimit();
-
-    public List<GameObject> BuildRange()
-    {
-        var tilesInRange = new List<GameObject>();
-        foreach (Building building in Buildings)
-            tilesInRange.AddRange(
-                building.TilesInRange);
-        tilesInRange = tilesInRange.Distinct().ToList();
-        return tilesInRange;
-    }
 
 }

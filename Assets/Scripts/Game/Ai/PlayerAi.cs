@@ -7,7 +7,7 @@ public class PlayerAi
     public Player Player { get; private set; }
     private int Delay { get; set; }
 
-    private List<BuildBaseLogic> BuildingLogics = new List<BuildBaseLogic>();
+    private readonly List<BuildBaseLogic> BuildingLogics = new List<BuildBaseLogic>();
 
     public PlayerAi(Player player)
     {
@@ -45,10 +45,9 @@ public class PlayerAi
             if (GameManager.Instance.GameState == GameState.PLAYING)
                 foreach (BuildBaseLogic logic in BuildingLogics)
                 {
-                    logic.FindSpotsToBuild();
+                    logic.FindSpotToBuild();
                     if (logic.ConditionsMet())
                         logic.Build();
-                    logic.YELLINFO();
                 }
 
             yield return new WaitForSeconds(Delay);

@@ -39,7 +39,7 @@ public class BuildingManager : MonoBehaviour
         if (player != null)
         {
             player.SubtractResources(buildingPref.cost);
-            player.Buildings.Add(building);
+            player.Segregator.Buildings.Add(building);
             building.flagCanvas.color = player.Color;
         }
     }
@@ -62,7 +62,7 @@ public class BuildingManager : MonoBehaviour
                 "You can't have enough resources");
             return false;
         }
-        if (!player.BuildRange().Contains(tileGO))
+        if (!player.Segregator.BuildRange().Contains(tileGO))
         {
             if (poping) PopupManager.Instance.Pop(
                 PopupManager.PopType.warning,

@@ -46,7 +46,7 @@ public class Building : MonoBehaviour
             GameManager.Instance.ClearFromGame(Owner);
         else
         {
-            Owner.Buildings.Remove(this);
+            Owner.Segregator.Buildings.Remove(this);
             Destroy(transform.gameObject);
         }
         GameManager.Instance.CheckEndgameCoditions();
