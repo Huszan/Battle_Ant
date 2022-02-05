@@ -45,9 +45,9 @@ public class PlayerAi
             if (GameManager.Instance.GameState == GameState.PLAYING)
                 foreach (BuildBaseLogic logic in BuildingLogics)
                 {
-                    logic.FindSpotToBuild();
-                    if (logic.ConditionsMet())
-                        logic.Build();
+                    var spot = logic.FindSpotToBuild();
+                    if (spot != null && logic.ConditionsMet())
+                        logic.Build(spot);
                 }
 
             yield return new WaitForSeconds(Delay);

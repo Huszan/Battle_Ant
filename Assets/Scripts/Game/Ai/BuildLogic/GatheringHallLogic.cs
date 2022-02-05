@@ -12,11 +12,12 @@ public class GatheringHallLogic : BuildBaseLogic
     internal override GameObject BuildingPrefab { get; set; }
     internal override Building Building { get; set; }
 
-    public override void FindSpotToBuild()
+    public override GameObject FindSpotToBuild()
     {
-        foreach (GameObject go in Player.Segregator.BuildRange())
-            if (Tilemap.Instance.GetInfo.GoodGatheringHallSpots.Contains(go))
-                SpotToBuild = go;
+        foreach (GameObject go in Player.Segregator.GetBuildRange)
+            if (Tilemap.Instance.GetInfo.GoodGatheringHallSpots.Contains(go) && go.GetComponentInChildren<Building>() == null)
+                return go;
+        return null;
     }
 
 }

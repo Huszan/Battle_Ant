@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearFromGame(Player player)
     {
-        foreach (Building building in player.Segregator.Buildings)
+        foreach (Building building in player.Segregator.GetBuildings)
             Destroy(building.gameObject);
         AiPlayers.Remove(player);
     }

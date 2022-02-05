@@ -14,28 +14,27 @@ public abstract class BuildBaseLogic
 
     private List<bool> Conditions()
     {
-        var conditions = new List<bool>();
-        conditions.Add(SpotToBuild != null);
-        conditions.Add(Building.cost < Player.Resources);
-        conditions.Add(Player.UnitCount() + (int)Building.cost / 10 * 2 < Player.UnitLimit());
+        var conditions = new List<bool>
+        {
+            Building.cost < Player.Resources,
+            Player.UnitCount() + (int)Building.cost / 10 * 2 < Player.UnitLimit()
+        };
         return conditions;
     }
     public virtual List<bool> AdditionalConditions()
     {
         var conditions = new List<bool>();
-        conditions.Add(true);
         return conditions;
     }
     public bool ConditionsMet() => Conditions().All(c => c == true) && AdditionalConditions().All(c => c == true);
 
-    public GameObject SpotToBuild { get; set; }
-    public abstract void FindSpotToBuild();
-    public void Build()
+    public abstract GameObject FindSpotToBuild();
+    public void Build(GameObject spotToBuild)
     {
         BuildingManager.Instance.PlaceBuilding(
-            SpotToBuild,
+            spotToBuild,
             BuildingPrefab,
             Player);
-        SpotToBuild = null;
     }
+    public string Info => $"There is {FindSpotToBuild()}";
 }

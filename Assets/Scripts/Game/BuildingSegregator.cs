@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class BuildingSegregator
 {
-    public List<Building> Buildings { get; private set; }
+    private List<Building> Buildings { get; set; }
+    public List<Building> GetBuildings => Buildings;
+    public void AddBuilding(Building building)
+    {
+        Buildings.Add(building);
+        BuildRange.AddRange(building.TilesInRange);
+    }
+    public void RemoveBuilding(Building building)
+    {
+        Buildings.Remove(building);
+        foreach (GameObject go in building.TilesInRange) 
+            BuildRange.Remove(go);
+    }
+    private List<GameObject> BuildRange { get; set; }
+    public List<GameObject> GetBuildRange => BuildRange.Distinct().ToList();
+
     public BuildingSegregator()
     {
         Buildings = new List<Building>();
+        BuildRange = new List<GameObject>();
     }
 
-
-
-    public List<GameObject> BuildRange()
-    {
-        var tilesInRange = new List<GameObject>();
-        foreach (Building building in Buildings)
-            tilesInRange.AddRange(
-                building.TilesInRange);
-        tilesInRange = tilesInRange.Distinct().ToList();
-        return tilesInRange;
-    }
 }

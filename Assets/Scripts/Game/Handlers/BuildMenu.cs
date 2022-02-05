@@ -81,12 +81,12 @@ public class BuildMenu : MonoBehaviour
     }
     private void ShowRangeIndicator()
     {
-        foreach (GameObject go in PlayerServiced.Segregator.BuildRange())
+        foreach (GameObject go in PlayerServiced.Segregator.GetBuildRange)
             go.GetComponent<SpriteRenderer>().color = CustomColors.CHOSEN_TILE;
     }
     public void HideRangeIndicator()
     {
-        foreach (GameObject go in PlayerServiced.Segregator.BuildRange())
+        foreach (GameObject go in PlayerServiced.Segregator.GetBuildRange)
             go.GetComponent<SpriteRenderer>().color = CustomColors.GREEN_TILE;
     }
 }

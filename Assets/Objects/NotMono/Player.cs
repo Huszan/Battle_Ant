@@ -11,15 +11,15 @@ public class Player
     public int UnitCount()
     {
         int count = 0;
-        foreach (Building building in Segregator.Buildings)
+        foreach (Building building in Segregator.GetBuildings)
             foreach (Transform child in building.gameObject.transform)
                 if (child.CompareTag("Unit")) count++;
         return count;
     }
     public bool IsDefeated()
     {
-        if (Segregator.Buildings.Count <= 0) return true;
-        foreach (Building building in Segregator.Buildings)
+        if (Segregator.GetBuildings.Count <= 0) return true;
+        foreach (Building building in Segregator.GetBuildings)
         {
             if (building.buildable == false)
                 return false;
@@ -43,7 +43,7 @@ public class Player
     public int Score()
     {
         int score = 0;
-        foreach (Building building in Segregator.Buildings)
+        foreach (Building building in Segregator.GetBuildings)
             score += (int)building.cost;
         score += (int)Resources / 5;
         return score * ((int)GameManager.Instance.Difficulty + 1);
