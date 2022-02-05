@@ -36,6 +36,7 @@ public class PlayerAi
                 }
         }
         BuildingLogics.Add(new GatheringHallLogic(player));
+        BuildingLogics.Add(new TowerLogic(player));
     }
 
     public IEnumerator Process()
@@ -47,7 +48,10 @@ public class PlayerAi
                 {
                     var spot = logic.FindSpotToBuild();
                     if (spot != null && logic.ConditionsMet())
+                    {
                         logic.Build(spot);
+                        break;
+                    }
                 }
 
             yield return new WaitForSeconds(Delay);

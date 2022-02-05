@@ -12,19 +12,17 @@ public class Player
     {
         int count = 0;
         foreach (Building building in Segregator.GetBuildings)
-            foreach (Transform child in building.gameObject.transform)
-                if (child.CompareTag("Unit")) count++;
+            if (building != null)
+                foreach (Transform child in building.gameObject.transform)
+                    if (child.CompareTag("Unit")) count++;
         return count;
     }
     public bool IsDefeated()
     {
-        if (Segregator.GetBuildings.Count <= 0) return true;
-        foreach (Building building in Segregator.GetBuildings)
-        {
-            if (building.buildable == false)
-                return false;
-        }
-        return true;
+        if (Segregator.GetBuildings.Count <= 0 || Segregator.GetBuildings[0].buildable != false) 
+            return true;
+        else 
+            return false;
     }
     public void AddAi() => PlayerAi = new PlayerAi(this);
 

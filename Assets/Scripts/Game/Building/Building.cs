@@ -28,7 +28,7 @@ public class Building : MonoBehaviour
         else
             Kill();
     }
-    private void Kill()
+    public void Kill()
     {
         if (!buildable)
             GameManager.Instance.ClearFromGame(Owner);
@@ -37,6 +37,7 @@ public class Building : MonoBehaviour
             Owner.Segregator.RemoveBuilding(this);
             Destroy(transform.gameObject);
         }
+
         GameManager.Instance.CheckEndgameCoditions();
     }
 

@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
         GameState = GameState.UNDEFINED;
         TimePassed.ResetCounter();
         TimePassed.StopCounting();
-        Debug.Log($"Game is over, time after finish -> {TimePassed.Counter}");
         AiManager.Instance.enabled = false;
         StartCoroutine(FinishGameAsync(index));
     }
@@ -197,9 +196,15 @@ public class GameManager : MonoBehaviour
 
     public void ClearFromGame(Player player)
     {
-        foreach (Building building in player.Segregator.GetBuildings)
-            Destroy(building.gameObject);
-        AiPlayers.Remove(player);
+        for (int i = player.Segregator.GetBuildings.Count-1; i >= 0; i--)
+            {
+                Building building = player.Segregator.GetBuildings[i];
+                player.Segregator.RemoveBuilding(building);
+                Destroy(building.gameObject);
+            }
+                
+        if (AiPlayers.Contains(player))
+            AiPlayers.Remove(player);
     }
     public void CheckEndgameCoditions()
     {
