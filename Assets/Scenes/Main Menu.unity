@@ -14141,8 +14141,8 @@ MonoBehaviour:
   Curtain: {fileID: 1599794766}
   GameWonScreen: {fileID: 1357501329}
   GameLostScreen: {fileID: 2017218452}
-  foodPercentage: 0.1
-  foodDistanceFromEdge: 4
+  foodPercentage: 0.05
+  foodDistanceFromEdge: 3
 --- !u!4 &1791326635
 Transform:
   m_ObjectHideFlags: 0

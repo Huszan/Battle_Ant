@@ -36,7 +36,7 @@ public class Tilemap : MonoBehaviour
                     return new Vector2(i, j);
             }
         }
-        return new Vector2();
+        return new Vector2(999,999);
     }
     public GameObject[] PlayerCorners() => new GameObject[]
     {

@@ -19,20 +19,8 @@ public class Building : MonoBehaviour
     public List<GameObject> TilesInRange { get; private set; }
     public void SetTilesInRange() => TilesInRange = Tilemap.Instance.TilesInRange(Position, range);
     public GameObject ClosestResourceNode { get; private set; }
-    public void SetClosestResourceNode() => ClosestResourceNode = FindClosestResource();
+    public void SetClosestResourceNode(GameObject node) => ClosestResourceNode = node;
 
-    private GameObject FindClosestResource()
-    {
-        foreach (GameObject tile in TilesInRange)
-        {
-            Building building = tile.GetComponentInChildren<Building>();
-            if (
-                building != null &&
-                building._name.Equals(BuildingManager.Instance.foodSource.GetComponent<Building>()._name))
-                return tile;
-        }
-        return null;
-    }
     public void Damage(float amount)
     {
         if (amount < hp)

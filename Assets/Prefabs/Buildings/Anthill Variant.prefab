@@ -25,6 +25,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRatePerMinute: 120
+  range: 2
   timer: {fileID: 5715383921468611780}
 --- !u!1001 &4185045156916548731
 PrefabInstance:
@@ -62,7 +63,7 @@ PrefabInstance:
     - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
       propertyPath: range
-      value: 50
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9205425883452535584, guid: ee71e1cdd36a3d94aa58ce101aa7ab5f,
         type: 3}
