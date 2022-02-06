@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
             TimePassed.StopCounting();
         if (gameState == GameState.PLAYING)
             TimePassed.StartCounting();
-        if (gameState == GameState.FINISHED)
+        if (gameState == GameState.FINISHED || gameState == GameState.UNDEFINED)
         {
             TimePassed.StopCounting();
             TimePassed.ResetCounter();
