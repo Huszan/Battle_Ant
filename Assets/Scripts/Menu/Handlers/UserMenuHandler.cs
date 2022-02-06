@@ -71,8 +71,8 @@ public class UserMenuHandler : MonoBehaviour
             {
                 Debug.LogWarning(e.Message);
                 PopupManager.Instance.Pop(
-                    PopupManager.PopType.warning,
-                    "Sorry, omething went wrong. Try again.");
+                    PopupManager.PopType.error,
+                    $"Error message : {e.Message}");
             }
             usernameInput.text = "";
             ShowUsers();

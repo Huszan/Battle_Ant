@@ -9,8 +9,7 @@ public enum GameState
     LOADING = 1,
     PAUSED = 2,
     PLAYING = 3,
-    FINISHED_WON = 4,
-    FINISHED_LOST = 5,
+    FINISHED = 4,
 }
 public enum Difficulty
 {
@@ -31,7 +30,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public GameState GameState { get; set; }
+    public GameState GameState { get; private set; }
+    public void SetGameState(GameState gameState)
+    {
+        GameState = gameState;
+        if (gameState == GameState.PAUSED)
+            TimePassed.StopCounting();
+        if (gameState == GameState.PLAYING)
+            TimePassed.StartCounting();
+        if (gameState == GameState.FINISHED)
+        {
+            TimePassed.StopCounting();
+            TimePassed.ResetCounter();
+        }
+    }
     public Difficulty Difficulty { get; private set; }
     public Timer TimePassed { get; private set; }
     public Player HumanPlayer { get; private set; }
@@ -52,7 +64,7 @@ public class GameManager : MonoBehaviour
         int numberOfOpponents,
         Difficulty difficulty)
     {
-        GameState = GameState.LOADING;
+        SetGameState(GameState.LOADING);
 
         Tilemap.Instance.GenerateTilemap(mapSize);
         SpawnFoodSources();
@@ -61,7 +73,7 @@ public class GameManager : MonoBehaviour
         InitializePlayers(numberOfOpponents);
         InitializePlayersAssets();
 
-        GameState = GameState.PLAYING;
+        SetGameState(GameState.PLAYING);
 
         AiManager.Instance.enabled = true;
         TimePassed.StartCounting();
@@ -69,9 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void FinishGame(int index)
     {
-        GameState = GameState.UNDEFINED;
-        TimePassed.ResetCounter();
-        TimePassed.StopCounting();
+        SetGameState(GameState.UNDEFINED);
         AiManager.Instance.enabled = false;
         StartCoroutine(FinishGameAsync(index));
     }
@@ -210,19 +220,15 @@ public class GameManager : MonoBehaviour
     {
         if (HumanPlayer.IsDefeated())
         {
-            GameState = GameState.FINISHED_LOST;
+            SetGameState(GameState.FINISHED);
             Curtain.SetActive(true);
             GameLostScreen.SetActive(true);
-            TimePassed.StopCounting();
-            TimePassed.ResetCounter();
         }
         else if (AiPlayers.Count <= 0)
         {
-            GameState = GameState.FINISHED_WON;
+            SetGameState(GameState.FINISHED);
             Curtain.SetActive(true);
             GameWonScreen.SetActive(true);
-            TimePassed.StopCounting();
-            TimePassed.ResetCounter();
         }
     }
 

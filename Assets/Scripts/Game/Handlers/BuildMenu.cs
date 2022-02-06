@@ -11,6 +11,9 @@ public class BuildMenu : MonoBehaviour
     public TMP_Text buildingDescriptionField;
     public TMP_Text buildingCostField;
     public GameObject PointerSticker;
+    [Header("Views")]
+    public GameObject openedView;
+    public GameObject closedView;
 
     private Player PlayerServiced { get; set; }
     private List<GameObject> BuildableBuildings { get; set; }
@@ -29,7 +32,21 @@ public class BuildMenu : MonoBehaviour
         CurrentBuldingIndex = 0;
     }
 
-    public void Activate() => Active = !Active;
+    public void Activate()
+    {
+        Active = !Active;
+        openedView.SetActive(Active);
+        closedView.SetActive(!Active);
+
+        if (Active)
+            GameManager.Instance.SetGameState(GameState.PAUSED);
+        else
+        {
+            HideRangeIndicator();
+            GameManager.Instance.SetGameState(GameState.PLAYING);
+        }
+    }
+        
     public void NextBuilding()
     {
         if (CurrentBuldingIndex == BuildableBuildings.Count - 1)
@@ -47,6 +64,8 @@ public class BuildMenu : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B))
+            Activate();
         if (Active)
         {
             PlayerServiced = GameManager.Instance.HumanPlayer;
@@ -63,6 +82,12 @@ public class BuildMenu : MonoBehaviour
                         _building,
                         PlayerServiced);
             }
+            if (Input.GetKeyDown(KeyCode.E))
+                NextBuilding();
+            if (Input.GetKeyDown(KeyCode.Q))
+                PreviousBuilding();
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Activate();
         }
     }
     private void Display(GameObject buildingToDisplay)
