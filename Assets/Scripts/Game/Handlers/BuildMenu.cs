@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class BuildMenu : MonoBehaviour
 {
+    public static BuildMenu Instance { get; set; }
+    public void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+
     [Header("Import")]
     public Image buildingImageField;
     public TMP_Text buildingNameField;
@@ -38,13 +47,8 @@ public class BuildMenu : MonoBehaviour
         openedView.SetActive(Active);
         closedView.SetActive(!Active);
 
-        if (Active)
-            GameManager.Instance.SetGameState(GameState.PAUSED);
-        else
-        {
+        if (!Active)
             HideRangeIndicator();
-            GameManager.Instance.SetGameState(GameState.PLAYING);
-        }
     }
         
     public void NextBuilding()
@@ -64,7 +68,7 @@ public class BuildMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) && GameManager.Instance.GameState == GameState.PLAYING)
             Activate();
         if (Active)
         {

@@ -16,14 +16,21 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.GameState == GameState.PLAYING)
-            ToggleIngameMenu();
+        if (GameManager.Instance.GameState != GameState.UNDEFINED)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                ToggleIngameMenu();
+        }
     }
 
-    private void ToggleIngameMenu()
+    public void ToggleIngameMenu()
     {
         ingameMenu.SetActive(!ingameMenu.activeSelf);
         curtain.SetActive(!curtain.activeSelf);
+        if (GameManager.Instance.GameState == GameState.PLAYING)
+            GameManager.Instance.SetGameState(GameState.PAUSED);
+        else
+            GameManager.Instance.SetGameState(GameState.PLAYING);
     }
 
 }
