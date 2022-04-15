@@ -48,6 +48,13 @@ public class GameManager : MonoBehaviour
     public Timer TimePassed { get; private set; }
     public Player HumanPlayer { get; private set; }
     public List<Player> AiPlayers { get; private set; }
+    public List<Player> Players()
+    {
+        List<Player> list = new List<Player>();
+        list.Add(HumanPlayer);
+        list.AddRange(AiPlayers);
+        return list;
+    }
 
     [Header("End game screen")]
     public GameObject Curtain;
@@ -77,6 +84,26 @@ public class GameManager : MonoBehaviour
 
         AiManager.Instance.enabled = true;
         TimePassed.StartCounting();
+    }
+
+    public void LoadGame(SaveData saveData)
+    {
+        SetGameState(GameState.LOADING);
+
+        Tilemap.Instance.GenerateTilemap(saveData.mapSize);
+        SpawnFoodSources();
+        Tilemap.Instance.GetInfo.Gather();
+        Difficulty = saveData.difficulty;
+        LoadPlayers(saveData.sPlayerList);
+        LoadPlayerAssets(saveData.sBuildingList);
+
+        SetGameState(GameState.PLAYING);
+
+        AiManager.Instance.enabled = true;
+        TimePassed.AddSeconds(saveData.time);
+        TimePassed.StartCounting();
+
+        PopupManager.Instance.Pop(PopupManager.PopType.success, "Game loaded successfully");
     }
 
     public void FinishGame(int index)
@@ -114,6 +141,17 @@ public class GameManager : MonoBehaviour
     {
         InitializeLocalPlayer();
         InitializeAiPlayers(enemiesCount);
+    }
+    private void LoadPlayers(List<SPlayer> sPlayerList)
+    {
+        AiPlayers = new List<Player>();
+        for (int i = 0; i < sPlayerList.Count; i++)
+        {
+            if (i == 0) 
+                HumanPlayer = new Player(sPlayerList[i].resources, sPlayerList[i].color);
+            else
+                AiPlayers.Add(new Player(sPlayerList[i].resources, sPlayerList[i].color));
+        }
     }
     private void InitializeLocalPlayer()
     {
@@ -157,6 +195,28 @@ public class GameManager : MonoBehaviour
             mainBuilding,
             player,
             false);
+        }
+    }
+    private void LoadPlayerAssets(List<SBuilding> sBuildings)
+    {
+        foreach(SBuilding building in sBuildings)
+        {
+            if (building.playerId == 0)
+            {
+                BuildingManager.Instance.PlaceBuilding(
+                Tilemap.Instance.CreatedTiles[(int)building.position.x, (int)building.position.y],
+                BuildingManager.Instance.buildings[building.id],
+                HumanPlayer,
+                false);
+            }
+            else
+            {
+                BuildingManager.Instance.PlaceBuilding(
+                Tilemap.Instance.CreatedTiles[(int)building.position.x, (int)building.position.y],
+                BuildingManager.Instance.buildings[building.id],
+                AiPlayers[building.playerId-1],
+                false);
+            }
         }
     }
     private void SpawnFoodSources()

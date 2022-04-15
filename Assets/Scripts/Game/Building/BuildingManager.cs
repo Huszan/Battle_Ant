@@ -37,7 +37,7 @@ public class BuildingManager : MonoBehaviour
         building.SetTilesInRange();
         if (player != null)
         {
-            player.SubtractResources(buildingPref.cost);
+            if (conditioned) player.SubtractResources(buildingPref.cost);
             player.Segregator.AddBuilding(building);
             building.flagCanvas.color = player.Color;
         }

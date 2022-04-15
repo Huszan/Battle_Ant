@@ -20,6 +20,18 @@ public class Building : MonoBehaviour
     public void SetTilesInRange() => TilesInRange = Tilemap.Instance.TilesInRange(Position, range);
     public GameObject ClosestResourceNode { get; private set; }
     public void SetClosestResourceNode(GameObject node) => ClosestResourceNode = node;
+    public int? Index()
+    {
+        int index = 0;
+        foreach(GameObject buildingGO in BuildingManager.Instance.buildings)
+        {
+            Building building = buildingGO.GetComponent<Building>();
+            if (building._name == _name)
+                return index;
+            index++;
+        }
+        return null;
+    }
 
     public void Damage(float amount)
     {

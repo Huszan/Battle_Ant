@@ -26,14 +26,22 @@ public class Player
     }
     public void AddAi() => PlayerAi = new PlayerAi(this);
 
-    public Player(float startingResources)
+    public Player(float startingResources, 
+        Color32 customColor = new Color32())
     {
-        Color = new Color32(
+        if (customColor.Equals(new Color32()))
+        {
+            Color = new Color32(
             (byte)Random.Range(0, 255),
             (byte)Random.Range(0, 255),
             (byte)Random.Range(0, 255),
-            255
-            );
+            255);
+        }
+        else
+        {
+            Color = customColor;
+        }
+        
         Resources = startingResources;
         Segregator = new BuildingSegregator();
     }
